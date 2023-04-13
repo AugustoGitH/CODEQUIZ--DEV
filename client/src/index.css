@@ -1,0 +1,124 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@font-face {
+  font-family: Electrica;
+  src: url("./assets/fonts/electrica-extrabold.ttf");
+}
+@font-face {
+  font-family: Consolas;
+  src: url("./assets/fonts/Consolas.ttf");
+}
+
+
+:root{
+  --font-Roboto-Mono: "Roboto Mono", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-Electrica: Electrica, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-Consolas: Consolas, "Roboto Mono", system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --font-size-super-small: .8rem;
+  --font-size-small: .9rem;
+  --font-size-medium: 1.2rem;
+  --font-size-large: 1.5rem;
+  --font-size-super-large: 1.7rem;
+
+  --color-info: #4d4df6;
+  --color-dark: #282c34;
+  --color-danger: #c8435a;
+  --color-success: #04c004;
+  --color-light: #fffdfd;
+  --color-gray-light: #F0F0F0;
+
+  --width-container-page: 1000px;
+  --padding-container-page: 1.7rem;
+
+  --height-alternative: 65px;
+  --gap-alternatives: 1rem;
+
+}
+
+h1{
+  font-size: 1.5rem;
+}
+
+h2{
+  font-size: 1.2rem;
+}
+
+a{
+  all: unset;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  
+}
+
+.block-code-lines{
+  width: 100%;
+  font-size: var(--font-size-small);
+  color: #545454;
+  text-align: start;
+  background: var(--color-gray-light);
+  padding: 1rem 2rem;
+  border-radius: .5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  font-family: var( --font-Electrica)
+}
+.block-code-lines > p{
+  line-height: 1.2rem;
+}
+
+@media (max-width: 500px){
+  .block-code-lines{
+    font-size: .9rem;
+  }
+  .block-code-lines > p{
+    line-height: 1.3rem;
+  }
+}
+
+body{
+  font-family: Electrica, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background: var(--color-light);
+  overflow-x: hidden;
+}
+
+.main{
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.content{
+  width: 1100px;
+
+}
+
+.capitalize{
+  text-transform: capitalize;
+  word-break: break-all;
+}
+
+.overflowY-none{
+  overflow-y: hidden;
+}
+
+.scale-0{
+  transform: scale(0);
+}
+
+.translate-rigth-0{
+  transform: translateX(100%);
+}
+
+
+
+
+

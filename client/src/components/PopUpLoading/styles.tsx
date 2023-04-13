@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import animationsPresence from '../../animations/presence'
 
 const PopUpStyled = styled.div`
   width: 100%;
@@ -13,28 +14,26 @@ const PopUpStyled = styled.div`
   background: #00000017;
   backdrop-filter: blur(3px);
   padding: 4rem;
+  @media (max-width: 690px) {
+    padding: 0;
+    }
   .card {
     width: 800px;
     background: #fff;
     padding: 3rem;
-    font-family: var(--font-Consolas);
     border-radius: 0.9rem;
     box-shadow: 0px 0px 70px #0000002a;
     color: #000;
-    @keyframes scaleTransition {
-      0% {
-        transform: scale(0);
-        opacity: 0;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-    animation: scaleTransition 0.3s ease-in;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    border: 1.7px solid #00000048;
+    ${animationsPresence.scale};
+    @media (max-width: 690px) {
+      width: 100%;
+      height: 100%;
+    }
     @keyframes presenceOpacity {
       0% {
         opacity: 0;
@@ -49,27 +48,37 @@ const PopUpStyled = styled.div`
       display: inline;
       background: #f2f2f2;
       padding: 0.7rem 2rem;
-      font-size: 1.2rem;
+      font-size: var(--font-size-medium);
       border-radius: 0.4rem;
       animation: presenceOpacity 0.3s;
+      text-align: center;
+      font-family: var(--font-Consolas);
+      border: 1.4px solid #00000024;
+      @media (max-width: 500px) {
+        font-size: var(--font-size-small);
+      }
     }
     img {
       width: 200px;
-      margin-top: 2rem;
+      margin-top: 3rem;
     }
     a {
       display: inline-block;
       background: #282c34;
       color: #fff;
       cursor: pointer;
-      font-size: 1.4rem;
-      letter-spacing: -0.1rem;
-      padding: 0.7rem 2rem;
+      font-size: var(--font-size-small);
+      
+      padding: 0.9rem 2rem;
       margin-top: 3rem;
       border-radius: 0.4rem;
       border: 1.3px solid #282c34;
       transition: 0.2s;
       animation: presenceOpacity 0.3s;
+      text-transform: uppercase;
+      @media (max-width: 500px) {
+        font-size: var(--font-size-super-small);
+      }
       &:hover {
         background: transparent;
         color: #282c34;

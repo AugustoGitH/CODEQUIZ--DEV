@@ -26,7 +26,8 @@ interface IUseCreatingStore{
     deleteQuestionQuiz: (id: string)=> void,
     addQuestionToQuiz: (question: IQuestion)=> void,
     resetQuiz: ()=> void,
-    addQuizAttributes: (value: any, key: string)=> void
+    addQuizAttributes: (value: any, key: string)=> void,
+    isProduction: boolean
 }
 
 
@@ -34,6 +35,7 @@ const useCreatingQuizStore = create<IUseCreatingStore>((set)=>({
 
     quizProducted: historyQuizProduction || models.newQuiz(),
     questionsProducted: historyQuizProduction?.questions || [],
+    isProduction: false,
 
     deleteQuestionQuiz: (id: string)=>{
         const filteredQuestions = (questions: IQuestion[])=>(
@@ -61,13 +63,17 @@ const useCreatingQuizStore = create<IUseCreatingStore>((set)=>({
         localStorage.removeItem(HISTORY_QUIZ_PRODUCTION);
         set({
             questionsProducted: [],
-            quizProducted: models.newQuiz()
+            quizProducted: models.newQuiz(),
+            isProduction: false
         })
     },
     addQuizAttributes: (value: string, key: string)=>{
-        set(state=>({
-            quizProducted: {...state.quizProducted, [key]: value  }
-        }))
+        if(value){
+            set(state=>({
+                quizProducted: {...state.quizProducted, [key]: value  },
+                isProduction: true
+            }))
+        }
     }
 }))
 
@@ -87,7 +93,8 @@ export const useCreatingQuiz = ()=>{
         resetQuiz,
         questionsProducted,
         addQuizAttributes,
-        deleteQuestionQuiz
+        deleteQuestionQuiz,
+        isProduction
     } = useCreatingQuizStore()
 
 
@@ -95,8 +102,11 @@ export const useCreatingQuiz = ()=>{
     const [isResetQuestion, setIsResetQuestion] = useState(false)
     const queryClient = useQueryClient()
 
+
     useEffect(()=>{
-        saveToQuizLocalStorage(quizProducted)
+        if(isProduction){
+            saveToQuizLocalStorage(quizProducted)
+        }
     }, [quizProducted])
 
 

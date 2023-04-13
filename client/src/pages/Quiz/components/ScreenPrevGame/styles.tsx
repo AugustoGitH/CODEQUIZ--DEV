@@ -31,7 +31,7 @@ export const ScreenPrevGame = styled.div`
       padding: 4rem 2rem 2rem 2rem;
     }
     h1 {
-      font-size: calc(var(--font-size-large) + .2rem);
+      font-size: calc(var(--font-size-large) + .1rem);
       text-transform: uppercase;
       display: flex;
       align-items: center;
@@ -39,11 +39,14 @@ export const ScreenPrevGame = styled.div`
       line-height: 1.5rem;
       letter-spacing: -.1rem;
       position: absolute;
-      top: -.7rem;
+      top: -1.1rem;
       
-      backdrop-filter: blur(5px);
+      background-color: var(--color-gray-light);
+      padding: .4rem 1rem;
+      border-radius: .4rem;
+      border: 1.4px solid #0000002e;
       @media (max-width: 500px) {
-        font-size: calc(var(--font-size-medium) + .2rem);
+        font-size: calc(var(--font-size-medium) + .1rem);
         line-height: 1.2rem;
       }
       i:nth-child(1) {

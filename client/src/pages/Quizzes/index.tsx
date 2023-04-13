@@ -16,6 +16,7 @@ import formatTime from "../../utils/fomatTime";
 import configsCreatingQuiz from "../../settings/quiz/configs"
 import LoaderSpinner from "../../components/LoaderSpinner";
 import { useQuizzes } from "../../stores/listQuizzes";
+import Footer from "../../components/Footer";
 
 function FilterQuizzes() {
   const [attrFilter, setAttrFilter] = useState({
@@ -145,9 +146,11 @@ export default function Quizzes() {
       <Container>
         <Q.Container>
           <FilterQuizzes />
+          <div className="line-horizontal"/>
           <ListQuizzes />
         </Q.Container>
       </Container>
+      <Footer/>
     </>
   );
 }

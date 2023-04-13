@@ -9,22 +9,7 @@ export const QuestionsReview = styled.div`
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    .button-back-results{
-        all: unset;
-        font-family: var(--font-Consolas);
-        color: var(--color-dark);
-        padding: .5rem 1rem;
-        border-radius: .3rem;
-        font-size: .8rem;
-        cursor: pointer;
-        border: 1.3px solid var(--color-dark);
-        transition: .2s;
-        &:hover{
-            background: var(--color-dark);
-            color: var(--color-light)
-        }
-    }
-    .button-navigate-questions {
+    .button-navigate-questions, .navigate-button-back {
       all: unset;
       font-size: 1.1rem;
       background: var(--color-dark);
@@ -36,20 +21,62 @@ export const QuestionsReview = styled.div`
       height: 30px;
       border-radius: 50%;
       cursor: pointer;
-      ${animationsPresence.scale}
+      ${animationsPresence.scale};
+      position: relative;
+      transition: .2s;
       i {
         transition: 0.2s;
       }
     }
-    .direction-left:hover {
-        i {
+    .direction-left::after, .direction-right::after, .navigate-button-back::after{
+      background-color: #1b1b22dd;
+      position: absolute;
+      font-size: .6rem;
+      padding: .3rem .6rem;
+      border-radius: .2rem;
+      bottom: -1.6rem;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: .2s;
+      text-transform: uppercase;
+      pointer-events: none;
+      
+    }
+    .direction-left,  .direction-right, .navigate-button-back{
+      &:hover{
+        &::after{
+          opacity: 1;
+          transform: translateY(0px);
+        }
+      }
+    }
+
+    .direction-left{
+      &::after{
+        content: "Retroceder";
+      }
+      &:hover{
+        i{
           transform: translateX(-7px);
         }
+      }
     }
-    .direction-right:hover {
-        i {
+    .direction-right {
+      &:hover{
+        i{
           transform: translateX(7px);
         }
+      }
+      &::after{
+        content: "Avançar";
+      }
+    }
+    .navigate-button-back{
+      background-color: var(--color-info);
+      font-size: .9rem;
+      &::after{
+        content: "Sair";
+      }
     }
   }
 `

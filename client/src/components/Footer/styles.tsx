@@ -9,7 +9,8 @@ export const Footer = styled.footer`
     justify-content: center;
     background: var(--color-gray-light);
     border-top: 1.4px solid #00000015;
-    padding: 2rem 0;
+    padding: 2rem 1rem;
+    margin-top: 100px;
     .content{
         width: 1000px;
         font-family: var(--font-Consolas);
@@ -54,6 +55,34 @@ export const Footer = styled.footer`
                 }
                 &::before{
                     content: "<h5>"
+                }
+            }
+        }
+        nav{
+            margin-top: 1rem;
+            display: flex;
+            gap: .3rem;
+            a{
+                font-size: 1.5rem;
+                cursor: pointer;
+                transition: .1s;
+                &:hover{
+                    transform: scale(1.2);
+                }
+            }
+        }
+        .rigths-reserveds{
+            letter-spacing: -.05rem;
+            margin-top: 2rem;
+            color: #000000bb;
+            text-align: center;
+            font-size: var(--font-size-small);
+            a{
+                color: var(--color-danger);
+                cursor: pointer;
+                text-decoration: underline;
+                &:hover{
+                    text-decoration: none;
                 }
             }
         }

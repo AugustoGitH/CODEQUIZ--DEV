@@ -1,7 +1,13 @@
 import styled from "styled-components";
 import animationsPresence from "../../animations/presence";
 
-const Container = styled.div``;
+const Container = styled.div`
+  .line-horizontal{
+    width: 100%;
+    height: 1.5px;
+    background-color: #0000002e;
+  }
+`;
 
 const FilterQuiz = styled.div`
   padding: 2rem 0;
@@ -9,22 +15,25 @@ const FilterQuiz = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
   .checkboxes-selected {
     width: 100%;
     p {
-      font-size: var(--font-size-medium);
-      margin-bottom: 0.7rem;
+      display: inline-flex;
+      padding: .2rem 1rem;
+      border: 1.3px solid #00000020;
+      border-radius: .3rem;
+      font-size: var(--font-size-small);
+      margin-bottom: 1rem;
       font-family: var(--font-Consolas);
-      @media (max-width: 500px) {
-        font-size: var(--font-size-small);
-      }
+      background: var(--color-gray-light);
+      text-transform: uppercase;
     }
   }
 `;
 
 const ListQuizzes = styled.ul`
-  padding: calc(2rem + 1rem) 0;
+  padding: calc(2rem + 2rem) 0;
   width: 100%;
   .message-not-quizzes {
     width: 100%;
@@ -42,7 +51,7 @@ const ListQuizzes = styled.ul`
   ul {
     width: 100%;
     display: grid;
-    gap: 2rem;
+    gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
     @media (max-width: 760px) {
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

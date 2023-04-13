@@ -11,6 +11,7 @@ import Container from '../../components/Container';
 import Header from '../../components/Header';
 import ListChallenges from './components/ListChallenges';
 import Button from '../../components/Button';
+import Footer from '../../components/Footer';
 
 export default function PainelScreen() {
   const historyQuizProduction = JSON.parse(
@@ -97,6 +98,7 @@ export default function PainelScreen() {
           </section>
         </P.PainelScreen>
       </Container>
+      <Footer/>
     </>
   );
 }

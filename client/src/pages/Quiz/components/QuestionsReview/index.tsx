@@ -125,8 +125,8 @@ export default function QuestionsReview({
               <i className='bx bx-chevrons-left'></i>
           </button>
           <button 
-            className="button-back-results" 
-            onClick={onBackResults}>Sair da revisão</button>
+            className="navigate-button-back" 
+            onClick={onBackResults}><i className='bx bx-log-out-circle'></i></button>
           <button 
             onClick={()=> handleNavigateQuestion("right")}
             className="button-navigate-questions direction-right"

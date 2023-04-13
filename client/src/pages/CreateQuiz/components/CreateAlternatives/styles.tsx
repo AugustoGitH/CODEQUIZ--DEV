@@ -217,7 +217,7 @@ export const CreateAlternativesQuiz = styled.div`
         margin-right: 1rem;
         @media (max-width: 500px) {
           font-size:  .8rem;
-          margin-right: .5rem;
+          margin-right: .6rem;
         }
       }
       p {

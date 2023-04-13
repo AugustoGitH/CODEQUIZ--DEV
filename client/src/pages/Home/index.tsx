@@ -49,8 +49,8 @@ const Home = ()=>{
                             Escolher Desafio
                         </Button>
                     </div>
-                    <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
                 </H.StartGame>
+                <Footer/>
         </>
     )
 }

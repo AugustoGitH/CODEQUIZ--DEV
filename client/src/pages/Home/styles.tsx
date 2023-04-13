@@ -18,6 +18,9 @@ const Apresentation = styled.section`
       padding: 0;
       background-color: var(--color-dark);
     }
+    @media (max-width: 500px){
+      height: 450px;
+    }
   }
   nav {
     width: 100%;

@@ -45,7 +45,6 @@ export interface IQuiz {
   questions: IQuestion[]
   questionTime: number | null
   createdAt?: Date
-  [key: string]: string | number | IQuestion[] | null | Date | undefined
 }
 
 

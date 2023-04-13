@@ -58,8 +58,7 @@ export default function CodeMirrorEditor({
     }, [reset])
 
     const handleChange = (value: string)=>{
-        const valueTrated = value.split("\n").filter(Boolean).join("\n")
-        setCodeValue(valueTrated)
+        setCodeValue(value.trim())
     }
 
 

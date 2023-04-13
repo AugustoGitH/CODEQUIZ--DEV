@@ -2,7 +2,6 @@
 
 
 
-import { Link } from "react-router-dom";
 import { IDifficultyLevel, ITechnology 
 } from "../../../../interfaces/IQuiz";
 import formatTime from "../../../../utils/fomatTime";
@@ -41,6 +40,10 @@ export default function ScreenPrevGame({
         if(tech === "css"){
             return (<i className='bx bxl-css3'/> )
         }
+        if(tech === "html"){
+            return (<i className='bx bxl-html5'/> )
+        }
+        return (<i className='bx bxs-purchase-tag-alt'></i> )
     }
 
     const definedStarsDifficulty = (difficulty: IDifficultyLevel | null) =>{

@@ -15,7 +15,7 @@ const FilterQuiz = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
   .checkboxes-selected {
     width: 100%;
     p {
@@ -33,7 +33,7 @@ const FilterQuiz = styled.div`
 `;
 
 const ListQuizzes = styled.ul`
-  padding: calc(2rem + 2rem) 0;
+  padding: calc(2rem + 3rem) 0;
   width: 100%;
   .message-not-quizzes {
     width: 100%;

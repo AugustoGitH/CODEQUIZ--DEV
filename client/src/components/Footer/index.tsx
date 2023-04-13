@@ -24,7 +24,7 @@ export default function Footer() {
           <a target="_blank" href="https://meuportfolio.up.railway.app">
             Augusto Caetano Westphal
           </a>
-          , 2023. All Rights Reserved
+          , 2023. <br/>All Rights Reserved
         </p>
       </div>
     </F.Footer>

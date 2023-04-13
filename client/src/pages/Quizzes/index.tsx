@@ -98,7 +98,12 @@ function Quiz({ quiz }: { quiz: IQuiz }) {
             
           </button>
         ) : (
-          <i className="bx bxl-javascript icon-tech"></i>
+          <i className={`bx bxl-${
+            quiz.technology === "javascript" ? "javascript" :
+            quiz.technology === "css" ? "css3" : 
+            quiz.technology === "html" ? "html5" : ""
+          } icon-tech`
+          }></i>
         )}
       </div>
       <div className="description">

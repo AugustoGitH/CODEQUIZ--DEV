@@ -136,6 +136,7 @@ const ListQuestionsHistory = styled.div`
     }
     p {
       line-height: 1.1rem;
+      white-space: break-spaces;
     }
     .block-editor {
       margin-top: 1rem;

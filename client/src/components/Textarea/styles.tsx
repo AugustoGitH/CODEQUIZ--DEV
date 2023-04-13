@@ -13,7 +13,7 @@ const TextareaStyled = styled.div<IPropsTextareaStyled>`
   font-family: var(--font-Consolas);
   @media (max-width: 500px) {
     padding: 1.5rem;
-      }
+  }
   &::after {
     content: '}';
     color: #c5a5c5;
@@ -59,6 +59,18 @@ const TextareaStyled = styled.div<IPropsTextareaStyled>`
       }
       &::placeholder {
         color: #c5a5c587;
+      }
+      &::-webkit-scrollbar {
+        width: 5px; /* width of the entire scrollbar */
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent; /* color of the tracking area */
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #353547; /* color of the scroll thumb */
+        border-radius: 20px; /* roundness of the scroll thumb */
       }
     }
   }

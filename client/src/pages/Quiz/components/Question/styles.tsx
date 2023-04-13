@@ -41,6 +41,7 @@ export const Question = styled.div`
             margin-bottom: 1.3rem;
             font-size: var(--font-size-small);
             word-wrap: break-word;
+            white-space: break-spaces;
         }
         .grid-alternatives{
             display: grid;

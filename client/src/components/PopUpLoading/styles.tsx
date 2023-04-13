@@ -52,7 +52,8 @@ const PopUpStyled = styled.div`
       border-radius: 0.4rem;
       animation: presenceOpacity 0.3s;
       text-align: center;
-      font-family: var(--font-Consolas);
+
+      text-transform: uppercase;
       border: 1.4px solid #00000024;
       @media (max-width: 500px) {
         font-size: var(--font-size-small);

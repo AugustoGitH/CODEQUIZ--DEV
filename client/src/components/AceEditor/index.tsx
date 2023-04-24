@@ -10,7 +10,7 @@ import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-html";
 
 import { AceEditorStyled } from "./styles";
-import { ITechnology } from "../../interfaces/IQuiz";
+import { ITechnology } from "../../interfaces/Quiz";
 
 interface IPropsCodeEditor {
   maxLines?: number;

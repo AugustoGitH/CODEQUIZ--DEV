@@ -45,6 +45,9 @@ export const ScreenFinished = styled.div`
       padding: .4rem 1rem;
       border-radius: .4rem;
       border: 1.4px solid #0000002e;
+      @media (max-width: 620px) {
+        width: calc(100% + 1rem);
+      }
       @media (max-width: 500px) {
         font-size: calc(var(--font-size-medium) + .1rem);
         line-height: 1.2rem;
@@ -62,7 +65,7 @@ export const ScreenFinished = styled.div`
     ul {
       width: 100%;
       display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: .5rem;
       li {
         display: flex;

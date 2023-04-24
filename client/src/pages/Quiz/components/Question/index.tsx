@@ -2,8 +2,6 @@
 import { useRef } from "react";
 
 
-import { IAnswersPlayerAlternative, IQuestion
-} from "../../../../interfaces/IQuiz";
 
 
 
@@ -11,9 +9,11 @@ import { IAnswersPlayerAlternative, IQuestion
 import * as Q from "./styles"
 import CodeMirrorEditor from "../../../../components/CodeMirrorEditor";
 import { checkAmountCharsLines } from "../../../../utils/checkAmountCharsLines";
+import { IQuestion } from "../../../../interfaces/Quiz";
+import { IAnswerPlayerQuestion } from "../../../../interfaces/Quiz/IQuizMatch";
 
 interface IPropsCreatingQuestion{
-    onClickAlternative: (response: IAnswersPlayerAlternative)=> void,
+    onClickAlternative: (response: IAnswerPlayerQuestion)=> void,
     timeOver: boolean,
     current: number,
     question: IQuestion,
@@ -39,7 +39,10 @@ export default function Question({
                             <CodeMirrorEditor 
                                 readOnly={true}
                                 preValue={question.typesComplement.blockCode.value}
-                                lang={question.typesComplement.blockCode.langMode}
+                                lang={
+                                    question.typesComplement.blockCode.langMode || 
+                                    "javascript"
+                                }
                             />
                         </div>
                     )

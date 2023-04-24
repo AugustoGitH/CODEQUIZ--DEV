@@ -78,7 +78,7 @@ const ListChallenges = styled.ul`
       border: none;
       font-family: var(--font-Consolas);
       width: 100%;
-      padding: 0.2rem 1rem;
+      padding: 0.2rem 2rem;
       cursor: pointer;
       text-align: start;
       transition: 0.2s;

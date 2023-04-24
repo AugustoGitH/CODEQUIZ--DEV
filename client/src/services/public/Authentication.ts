@@ -1,19 +1,19 @@
 import axios, { AxiosError } from 'axios'
 
-import urlsAPI from '../urls'
 import { ILogin, IRegister } from '../../interfaces/IAuthentication'
+import { routesAuthentication } from '../routes/public'
 
 interface IResponseAuthentication {
   message: string
   status: boolean
 }
 
-const urlsAuthentication = urlsAPI.public.authentication.routes
+
 
 const authentication = {
   async register(user: IRegister): Promise<IResponseAuthentication> {
     try {
-      const { data } = await axios.post(urlsAuthentication.register, user)
+      const { data } = await axios.post(routesAuthentication.register, user)
 
       return {
         message: data?.message || 'Seu registro foi realizado com sucesso!',
@@ -35,7 +35,7 @@ const authentication = {
   },
   async login(user: ILogin): Promise<IResponseAuthentication> {
     try {
-      const { data } = await axios.post(urlsAuthentication.login, user)
+      const { data } = await axios.post(routesAuthentication.login, user)
 
       return {
         message: data?.message || 'Login realizado com sucesso!',
@@ -56,7 +56,7 @@ const authentication = {
   },
   async logout(): Promise<IResponseAuthentication> {
     try {
-      const { data } = await axios.get(urlsAuthentication.logout)
+      const { data } = await axios.get(routesAuthentication.logout)
 
       return {
         message: data?.message || 'Logout realizado com sucesso!',

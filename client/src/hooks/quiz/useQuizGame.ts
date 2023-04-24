@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react'
 
-import {
-  IQuestion,
-  IQuiz,
-  IAnswersPlayerAlternative,
-  IAnswersServer,
-  IIssueResolutionTime,
-} from '../../interfaces/IQuiz'
-
 import configsCreatingQuiz from '../../settings/quiz/configs'
 
 import quizServices from '../../services/public/Quiz'
-import useFetchQuiz from '../../queries/quiz'
+import useFetchQuiz from '../../queries/quiz/public/quiz'
+import { 
+  IAnswerSentByServer, 
+  IQuestion, 
+  IQuizSentToCustomer 
+} from '../../interfaces/Quiz'
+
+import { 
+  IAnswerPlayerQuestion, 
+  IIssueResolutionTime 
+} from '../../interfaces/Quiz/IQuizMatch'
 
 
-const useGame = (quiz: IQuiz | undefined) => {
+const useGame = (quiz: IQuizSentToCustomer | undefined) => {
   const [isGameStarted, setIsGameStarted] = useState(false)
   const [isGameFinished, setIsGameFinished] = useState(false)
   const [isReviewGame, setIsReviewGame] = useState(false)
@@ -24,10 +26,10 @@ const useGame = (quiz: IQuiz | undefined) => {
   const [timeOutForQuestion, setTimeOutForQuestion] = useState(false)
 
   const [playerAnswers, setPlayerAnswers] = useState<
-    IAnswersPlayerAlternative[]
+    IAnswerPlayerQuestion[]
   >([])
 
-  const [serverAnswers, setServerAnswers] = useState<IAnswersServer | null>(null)
+  const [serverAnswers, setServerAnswers] = useState<IAnswerSentByServer | null>(null)
   const [isWaintingAnswer, setIsWaintingAnswer] = useState<boolean | null>(null)
 
   // eslint-disable-next-line max-len
@@ -86,7 +88,7 @@ const useGame = (quiz: IQuiz | undefined) => {
   const captureLostAnswer = (question: IQuestion | null) => {
     if (!question || !timeToAskQuestions) return
 
-    const lostResponse: IAnswersPlayerAlternative = {
+    const lostResponse: IAnswerPlayerQuestion= {
       idAlternative: null,
       idQuestion: question.id,
     }
@@ -122,7 +124,7 @@ const useGame = (quiz: IQuiz | undefined) => {
 
   // Quando a alternativa é clicada e a questão é respondida
   const alternativeAnswered = (
-    responseAlternative: IAnswersPlayerAlternative
+    responseAlternative: IAnswerPlayerQuestion
   ) => {
     setPlayerAnswers((preResponses) => [...preResponses, responseAlternative])
     setIssueResolutionTime((prevTimes) => [
@@ -179,7 +181,7 @@ const useGame = (quiz: IQuiz | undefined) => {
 
   // Trabalhar no clique da alternativa
   const handleClickAlternative = (
-    responseAlternative: IAnswersPlayerAlternative
+    responseAlternative: IAnswerPlayerQuestion
   ) => {
     alternativeAnswered(responseAlternative)
   }

@@ -1,4 +1,4 @@
-import { IAlternative } from "../interfaces/IQuiz"
+import { IAlternative } from "../interfaces/Quiz"
 
 
 

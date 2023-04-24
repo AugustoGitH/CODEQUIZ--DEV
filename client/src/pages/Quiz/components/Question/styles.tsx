@@ -36,6 +36,11 @@ export const Question = styled.div`
             min-height: 250px;
             background-color: var(--color-dark);
             border-radius: .5rem;
+            @media (max-width: 500px) {
+                width: calc(100% + 2rem);
+                margin-left: -1rem;
+                border-radius: 0;
+            }
         }
         .question-paragraph{
             margin-bottom: 1.3rem;

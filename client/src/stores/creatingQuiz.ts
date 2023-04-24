@@ -1,17 +1,18 @@
 import { create } from "zustand"
 import { HISTORY_QUIZ_PRODUCTION } from "../constants/localstorage"
-import { IQuestion, IQuiz } from "../interfaces/IQuiz"
 import models from "../settings/quiz/models"
 import { useEffect, useState } from "react"
 import { useQueryClient } from "react-query"
 import conditionProgressQuestion from '../settings/quiz/conditions'
 import creatingQuizService from '../services/user/quiz/CreatingQuiz'
+import { IQuestion, IQuizSentByCustomer } from "../interfaces/Quiz"
+import { IQuizSentByCustomerCreation } from "../interfaces/Quiz/IQuizCreation"
 
-const historyQuizProduction: IQuiz | null = JSON.parse(
+const historyQuizProduction: IQuizSentByCustomer | null = JSON.parse(
     localStorage.getItem( HISTORY_QUIZ_PRODUCTION ) || "null"
 )
 
-const saveToQuizLocalStorage = (quiz: IQuiz)=>{
+const saveToQuizLocalStorage = (quiz: IQuizSentByCustomerCreation)=>{
     localStorage.setItem(
         HISTORY_QUIZ_PRODUCTION,
         JSON.stringify(quiz)
@@ -21,18 +22,17 @@ const saveToQuizLocalStorage = (quiz: IQuiz)=>{
 
 
 interface IUseCreatingStore{
-    quizProducted: IQuiz,
+    quizProducted: IQuizSentByCustomerCreation,
     questionsProducted: IQuestion[] | [],
     deleteQuestionQuiz: (id: string)=> void,
     addQuestionToQuiz: (question: IQuestion)=> void,
     resetQuiz: ()=> void,
-    addQuizAttributes: (value: any, key: string)=> void,
+    addQuizAttributes: (value: any, key: keyof IQuizSentByCustomer)=> void,
     isProduction: boolean
 }
 
 
 const useCreatingQuizStore = create<IUseCreatingStore>((set)=>({
-
     quizProducted: historyQuizProduction || models.newQuiz(),
     questionsProducted: historyQuizProduction?.questions || [],
     isProduction: false,
@@ -110,7 +110,7 @@ export const useCreatingQuiz = ()=>{
     }, [quizProducted])
 
 
-    const addQuestionAttributes = (value: any, key: string) =>{
+    const addQuestionAttributes = (value: any, key: keyof IQuestion) =>{
         setQuestion(prevQuestion=> ({ ...prevQuestion, [key]: value }))
     }
 

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { useParams } from "react-router-dom";
 
 import PageNotFound from "../NotFound";
@@ -13,8 +14,6 @@ import ScreenPrevGame from "./components/ScreenPrevGame";
 import Question from "./components/Question";
 import PageLoaded from "../../components/PageLoaded";
 import QuestionsReview from "./components/QuestionsReview";
-
-
 
 
 
@@ -43,17 +42,16 @@ export default function PageQuiz() {
          backToFinalResults
     } = useQuizGame(idQuiz || "")
 
-
   if (isFetching && !quiz || isGameFinished && isWaintingAnswer ) return <PageLoaded/>;
   if (!isFetching && !quiz) return <PageNotFound />;
 
-  return (
+  return quiz ? (
     <>
       <Header position="sticky">
         {
           isGameStarted && !isGameFinished && quiz  && !isReviewGame  ? (
             <code style={{fontSize: "1.1rem"}}>
-              <i className='bx bxs-timer' ></i>Tempo: {currentTimeQuestion}s
+              <i className='bx bxs-timer' ></i>{currentTimeQuestion}s
             </code>
           ) : <></>
         }
@@ -63,9 +61,9 @@ export default function PageQuiz() {
             !isGameStarted && (
                 <ScreenPrevGame 
                     infosQuiz={{
-                        difficulty: quiz?.difficulty || "beginner",
-                        questionTime: quiz?.questionTime || 0,
-                        technology: quiz?.technology || "javascript"
+                        difficulty: quiz.difficulty,
+                        questionTime: quiz.questionTime || 0,
+                        technology: quiz.technology
                     }} 
                     onClickStartGame={startGame}
                 />
@@ -92,7 +90,7 @@ export default function PageQuiz() {
             ) : <></>
         }
         {
-          isReviewGame && quiz && serverAnswers ? (
+          isReviewGame && serverAnswers ? (
             <QuestionsReview 
               onBackResults={backToFinalResults}
               questions={quiz.questions}
@@ -104,6 +102,6 @@ export default function PageQuiz() {
 
       </Container>
     </>
-  );
+  ) : <></>
 }
 

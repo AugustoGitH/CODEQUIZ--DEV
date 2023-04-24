@@ -1,9 +1,7 @@
 
 
 
-
-import { IDifficultyLevel, ITechnology 
-} from "../../../../interfaces/IQuiz";
+import { IDifficultyLevel, ITechnology } from "../../../../interfaces/Quiz";
 import formatTime from "../../../../utils/fomatTime";
 
 import * as S from "./styles"

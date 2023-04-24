@@ -10,8 +10,8 @@ import {
  } from '../../../../settings/quiz/constants';
 
 import CodeMirrorEditor from '../../../../components/CodeMirrorEditor';
-import { ITypesComplement } from '../../../../interfaces/IQuiz';
 import models from '../../../../settings/quiz/models';
+import { ITypesComplement } from '../../../../interfaces/Quiz';
 
 
 

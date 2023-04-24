@@ -83,14 +83,17 @@ const PopUpHistoryQuestions = styled.div`
     text-align: start;
     font-size: var(--font-size-small);
     color: #fac863;
-    background: #282c34;
+    background: var(--color-dark);
     font-weight: 100;
-    padding: 0.3rem 1.4rem;
+    padding: 0.3rem 1rem;
     border-radius: 0.3rem;
     @media (max-width: 700px) {
       max-width: 100%;
       width: 100%;
       text-align: center;
+    }
+    @media (max-width: 500px) {
+      font-size: var(--font-size-super-small);
     }
     span {
       text-transform: lowercase;

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,12 +8,12 @@ import Input from '../../components/Input';
 import BlockCodeForm from './components/BlockCodeForm';
 
 import authenticationSchemas from '../../schemas/authentication';
-import verifyTokenService from '../../services/public/VerifyToken';
 import authenticationService from '../../services/public/Authentication';
 
 import type { SubmitHandler, FieldValues } from 'react-hook-form';
 
 import { RegisterScreenStyled } from './styles';
+import useFetchVerifyCredential from '../../queries/verifyCredential';
 
 
 function FormRegister() {
@@ -145,16 +144,9 @@ function FormLogin() {
 
 export default function RegisterScreen() {
   const { section } = useParams();
-  const [isUser, setIsUser] = useState<boolean | null>(null);
+  const { data: isAuthentited } = useFetchVerifyCredential()
 
-  useEffect(() => {
-    verifyTokenService.user().then(response => {
-        const { isLogged } = response.data.user
-        setIsUser( isLogged );
-    });
-  }, []);
-
-  return isUser !== null && !isUser ? (
+  return !isAuthentited ? (
     <>
       <Header position="fixed" />
       <Container>
@@ -166,6 +158,6 @@ export default function RegisterScreen() {
       </Container>
     </>
   ) : (
-    isUser && <Navigate to="/painel" />
+    isAuthentited && <Navigate to="/painel" />
   );
 }

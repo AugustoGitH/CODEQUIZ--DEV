@@ -7,8 +7,8 @@ import AceEditor from '../../../../components/AceEditor';
 
 import * as V from './styles';
 
-import { IQuestion, IAlternative, ITechnology } from "../../../../interfaces/IQuiz"
 import { checkAmountCharsLines } from '../../../../utils/checkAmountCharsLines';
+import { IAlternative, IQuestion, ITechnology } from '../../../../interfaces/Quiz';
 
 
 interface IPropQuestion{
@@ -44,7 +44,7 @@ function Question({ question, onDelete, index }: IPropQuestion) {
           <AceEditor 
             disabled 
             preValue={question.typesComplement.blockCode.value} 
-            mode={question.typesComplement.blockCode.langMode} 
+            mode={question.typesComplement.blockCode.langMode || 'javascript'} 
             fontSize='small'
           />
         </div>
@@ -116,7 +116,7 @@ export default function ButtonViewHistoryQuestions() {
                   questionsProducted?.map((question, index) => (
                     <Question
                       question={question}
-                      modeEditor={quizProducted.technology}
+                      modeEditor={quizProducted.technology || 'javascript'}
                       key={index}
                       index={index}
                       onDelete={deleteQuestionQuiz}

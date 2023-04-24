@@ -9,6 +9,8 @@ import PageNotFound from "./pages/NotFound"
 import PageAuthentication from "./pages/Authentication"
 
 import PagePainel from "./pages/Painel"
+import PageUserCreatedQuiz from "./pages/UserCreatedQuiz"
+
 import PageCreateQuiz from "./pages/CreateQuiz"
 import PageQuizzes from "./pages/Quizzes"
 
@@ -30,11 +32,19 @@ function App() {
         </PrivateRouter>
       }/>
 
+      <Route path="/painel/quizzes/:id" element={
+        <PrivateRouter redirect='/auth/login'>
+          <PageUserCreatedQuiz/>
+        </PrivateRouter>
+      }/>
+
       <Route path="/painel/create-quiz" element={
         <PrivateRouter redirect='/auth/login'>
           <PageCreateQuiz/>
         </PrivateRouter>
       }/>
+
+      
       
        <Route path="/quizzes" element={<PageQuizzes/>}/>
        <Route path="/quizzes/:id" element={<PageQuiz/>}/>

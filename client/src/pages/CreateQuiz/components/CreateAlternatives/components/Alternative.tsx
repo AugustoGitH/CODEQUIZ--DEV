@@ -1,4 +1,5 @@
-import { IAlternative } from "../../../../../interfaces/IQuiz";
+import { IAlternative } from "../../../../../interfaces/Quiz"
+
 
 interface IPropsAlternative{
     alternative: IAlternative,

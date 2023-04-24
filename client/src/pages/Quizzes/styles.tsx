@@ -51,22 +51,33 @@ const ListQuizzes = styled.ul`
   ul {
     width: 100%;
     display: grid;
-    gap: 1rem;
+    gap: 3.1rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
     @media (max-width: 760px) {
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-    .quiz-game {
-      height: 300px;
+    } 
+  }
+`;
+
+
+export const CardQuiz = styled.li`
+    height: 320px;
       cursor: pointer;
       .cover {
-        height: 70%;
+        height: 55%;
         background: #f0f0f0;
         border-radius: 0.4rem;
-        border: 1.5px solid #282a36;
+        border: 1.5px solid #282a363b;
         display: flex;
         align-items: center;
         justify-content: center;
+        position: relative;
+        .image-creator{
+          position: absolute;
+          width: 40px;
+          top: 0;
+          left: 0;
+        }
         .icon-tech {
           font-size: 4rem;
           color: #282a36;
@@ -97,8 +108,9 @@ const ListQuizzes = styled.ul`
         }
       }
       .description {
-        height: 30%;
+        height: 50%;
         padding-top: 0.5rem;
+        position: relative;
         .quiz-tags {
           display: flex;
           gap: 1rem;
@@ -111,6 +123,9 @@ const ListQuizzes = styled.ul`
             border-radius: 0.3rem;
             font-size: var(--font-size-super-small);
             letter-spacing: 0.1rem;
+            &:nth-child(2){
+              background-color: var(--color-info);
+            }
           }
         }
         .display-time,
@@ -119,9 +134,31 @@ const ListQuizzes = styled.ul`
           font-family: var(--font-Consolas);
           font-size: var(--font-size-small);
         }
+        .profile-creator{
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          position: absolute;
+          width: 100%;
+          bottom: 0;
+          img{
+            width: 30px;
+            height:30px;
+            object-fit: cover;
+            background-color: var(--color-gray-light);
+            border: 1.2px solid #00000027;
+            border-radius: 50%;
+          }
+          span{
+            font-size: .8rem;
+            color: #000000c5;
+            margin-left: 1rem;
+            text-transform: uppercase;
+          }
+        }
       }
-    }
-  }
-`;
+    
+  
+`
 
 export { Container, FilterQuiz, ListQuizzes };

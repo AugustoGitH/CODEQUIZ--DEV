@@ -1,22 +1,19 @@
 import { useState } from 'react'
 
-import {
-  IAnswersPlayerAlternative,
-  IQuestion,
-  IAnswersServer,
-} from '../../../../interfaces/IQuiz'
 
 import * as Q from '../Question/styles'
 import * as QR from "./styles"
 import CodeMirrorEditor from '../../../../components/CodeMirrorEditor'
 import { checkAmountCharsLines } from '../../../../utils/checkAmountCharsLines'
+import { IAnswerSentByServer, IQuestion } from '../../../../interfaces/Quiz'
+import { IAnswerPlayerQuestion } from '../../../../interfaces/Quiz/IQuizMatch'
 // import CodeMirrorEditor from "../../../../components/CodeMirrorEditor";
 // import { checkAmountCharsLines } from "../../../../utils/checkAmountCharsLines";
 
 interface IPropsCreatingQuestionsReview {
   questions: IQuestion[]
-  answersPlayerAlternatives: IAnswersPlayerAlternative[]
-  answersServer: IAnswersServer,
+  answersPlayerAlternatives: IAnswerPlayerQuestion[]
+  answersServer: IAnswerSentByServer,
   onBackResults: ()=> void
 }
 
@@ -38,7 +35,7 @@ function Question({ question, current, altCorrect, altIncorrect }: IPropsQuestio
             <CodeMirrorEditor
               readOnly={true}
               preValue={question.typesComplement.blockCode.value}
-              lang={question.typesComplement.blockCode.langMode}
+              lang={question.typesComplement.blockCode.langMode || 'javascript'}
             />
           </div>
         )}

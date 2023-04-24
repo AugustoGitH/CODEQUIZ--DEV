@@ -49,6 +49,9 @@ export const ScreenPrevGame = styled.div`
         font-size: calc(var(--font-size-medium) + .1rem);
         line-height: 1.2rem;
       }
+      @media (max-width: 620px) {
+        width: calc(100% + 1rem);
+      }
       i:nth-child(1) {
         transform: rotate(20deg);
         font-size: 1.7rem;
@@ -62,7 +65,7 @@ export const ScreenPrevGame = styled.div`
     ul {
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 0.5rem;
       li {
         display: flex;

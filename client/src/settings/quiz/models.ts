@@ -1,5 +1,9 @@
+import { 
+  IAlternative, 
+  IQuestion, 
+  ITypesComplement } from '../../interfaces/Quiz'
+import { IQuizSentByCustomerCreation } from '../../interfaces/Quiz/IQuizCreation'
 import generateId from '../../utils/generateID'
-import { IQuiz, IAlternative, IQuestion, ITypesComplement } from '../../interfaces/IQuiz'
 
 interface ICreateAlternative {
   value: string
@@ -18,7 +22,7 @@ const models = {
       url: ""
     }
   }),
-  newQuiz: (): IQuiz => ({
+  newQuiz: (): IQuizSentByCustomerCreation => ({
     id: generateId(30),
     questions: [],
     technology: '',

@@ -86,15 +86,15 @@ export const EditorCode = styled.div<IPropsEditorCode>`
     @media (max-width: 500px) {
       font-size: .7rem;
     }
-    &::-webkit-scrollbar {
+    *::-webkit-scrollbar {
       width: 5px; /* width of the entire scrollbar */
     }
 
-    &::-webkit-scrollbar-track {
+    *::-webkit-scrollbar-track {
       background: transparent; /* color of the tracking area */
     }
 
-    &::-webkit-scrollbar-thumb {
+    *::-webkit-scrollbar-thumb {
       background-color: #353547; /* color of the scroll thumb */
       border-radius: 20px; /* roundness of the scroll thumb */
     }

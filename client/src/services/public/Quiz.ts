@@ -1,17 +1,18 @@
 import axios, { AxiosError } from 'axios'
-import urlsAPI from '../urls'
-import { IAnswersPlayer, IAnswersServer } from '../../interfaces/IQuiz'
+import { routesQuiz } from "../routes/public"
+import { IAnswerSentByServer } from '../../interfaces/Quiz'
+import { IAnswerPlayer } from '../../interfaces/Quiz/IQuizMatch'
 
 interface IResponseCheckAnswers {
   message: string
-  answers: IAnswersServer | null
+  answers: IAnswerSentByServer | null
 }
 
 const Quiz = {
-  async checkAnswers(answers: IAnswersPlayer): Promise<IResponseCheckAnswers> {
+  async checkAnswers(answers: IAnswerPlayer): Promise<IResponseCheckAnswers> {
     try {
       const { data } = await axios.post(
-        urlsAPI.public.quiz.routes.checkAnswers,
+        routesQuiz.checkAnswers,
         answers
       )
       return {

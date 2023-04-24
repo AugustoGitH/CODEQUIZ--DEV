@@ -38,7 +38,8 @@ export const Button = styled.button<IPropsHeaderStyled>`
       : `var(--color-${props.color})`};
   ${animationsPresence.scale};
   @media (max-width: 500px) {
-    font-size: var(--font-size-small);
+    padding: 0.4rem .8rem;
+    font-size: var(--font-size-super-small);
   }
   &::after {
     content: '}';

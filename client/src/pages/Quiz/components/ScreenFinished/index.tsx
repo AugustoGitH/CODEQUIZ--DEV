@@ -1,13 +1,14 @@
 /* eslint-disable max-len */
+import { IAnswerSentByServer } from "../../../../interfaces/Quiz";
+import { IIssueResolutionTime } from "../../../../interfaces/Quiz/IQuizMatch";
 import * as S from "./styles";
 import { Link } from "react-router-dom";
-import { IAnswersServer, IIssueResolutionTime } from "../../../../interfaces/IQuiz";
 
 
 interface IPropsScreenFinished {
   onRestartGame: ()=> void,
   onReviewGame: ()=> void
-  serverAnswers: IAnswersServer,
+  serverAnswers: IAnswerSentByServer,
   issueResolutionTime: IIssueResolutionTime[]
 }
 

@@ -1,13 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import verifyTokenServices from "../../services/public/VerifyToken"
 import authenticationServices from '../../services/public/Authentication';
 
 
 import PopUpConfirm from "../PopUpConfirm"
 
 import * as H from "./styles"
+import useFetchVerifyCredential from '../../queries/verifyCredential';
 
 interface IPropsHeader{
     position?: "sticky" | "fixed",
@@ -35,16 +35,8 @@ const Header = (
     }, children }: IPropsHeader
 )=>{
     const navigation = useNavigate();
-    const [ isUser, setIsUser ] = useState<boolean | null>(null)
     const [ showPopUpLogout, setShowPopUpLogout ] = useState<boolean>(false);
-    useEffect(()=>{
-        if(home){
-            verifyTokenServices.user().then(response=>{
-                const { data } = response
-                setIsUser(data.user.isLogged)
-            })
-        }
-    }, [])
+    const { data: isAuthenticated, isFetching } = useFetchVerifyCredential()
 
     const logout = ()=>{
         authenticationServices.logout().then(response=>{
@@ -86,7 +78,7 @@ const Header = (
                 >Sair</button>
             )
         }
-        if( home.default && isUser ){
+        if( home.default && isAuthenticated ){
             buttonsIncludes.push(
                 <Link 
                     to="/painel" 
@@ -95,7 +87,7 @@ const Header = (
                 >Painel</Link>
             )
         }
-        if( home.default && !isUser !== null && isUser === false ){
+        if( home.default && !isFetching && !isAuthenticated ){
             buttonsIncludes.push(
                 <span key="auth" className="nav-content">
                     <Link 

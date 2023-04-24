@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios'
-import { IQuiz } from '../../../interfaces/IQuiz'
-import urlsAPI from '../../urls'
+
+import { routesQuiz } from '../../routes/user'
+import { IQuizSentByCustomerCreation } from '../../../interfaces/Quiz/IQuizCreation'
 
 interface IResponseCreatingQuiz {
   message: string
@@ -8,11 +9,11 @@ interface IResponseCreatingQuiz {
 }
 
 export default async function creatingQuiz(
-  quiz: IQuiz
+  quiz: IQuizSentByCustomerCreation
 ): Promise<IResponseCreatingQuiz> {
   try {
     const { data } = await axios.post(
-      urlsAPI.private.quiz.routes.creating,
+      routesQuiz.creatingQuiz,
       quiz
     )
 

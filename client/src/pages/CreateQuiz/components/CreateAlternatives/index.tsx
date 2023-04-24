@@ -8,11 +8,11 @@ import { alternativeTypes } from "../../../../settings/quiz/constants";
 import creatingQuizModels from "../../../../settings/quiz/models";
 import configsCreatingQuiz from "../../../../settings/quiz/configs";
 
-import { IAlternative } from "../../../../interfaces/IQuiz";
 
 import TextareCreatedAlt from "./components/TextareCreatedAlt"
 import Alternative from "./components/Alternative";
 import { checkAmountCharsLines } from "../../../../utils/checkAmountCharsLines";
+import { IAlternative } from "../../../../interfaces/Quiz";
 
 
 

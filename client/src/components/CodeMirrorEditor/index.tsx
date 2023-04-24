@@ -9,7 +9,7 @@ import { EditorView, keymap } from "@codemirror/view";
 import { dracula } from '@uiw/codemirror-theme-dracula';
 
 import * as S from "./styles"
-import { ITechnology } from '../../interfaces/IQuiz';
+import { ITechnology } from '../../interfaces/Quiz';
 
 interface ICodeMirrorEditor{
     preValue?: string,
@@ -27,7 +27,6 @@ export default function CodeMirrorEditor({
     onChange, 
     lang = "javascript", 
     reset, readOnly = false, 
-    maxLines = 12,
     fieldSelectLang
 }: ICodeMirrorEditor){
 

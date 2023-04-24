@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react';
 
 import * as P from './styles';
 
-import verifyTokenService from '../../services/public/VerifyToken';
 
-import { NAME_USER, HISTORY_QUIZ_PRODUCTION } from '../../constants/localstorage';
+import { HISTORY_QUIZ_PRODUCTION } from '../../constants/localstorage';
 
 
 import Container from '../../components/Container';
@@ -12,34 +10,25 @@ import Header from '../../components/Header';
 import ListChallenges from './components/ListChallenges';
 import Button from '../../components/Button';
 import Footer from '../../components/Footer';
+import HeaderUserConfigs from './components/HeaderUserConfigs';
+import useFetchGetInfosUser from '../../queries/user/user/getInfosUser';
 
 export default function PainelScreen() {
   const historyQuizProduction = JSON.parse(
     localStorage.getItem(HISTORY_QUIZ_PRODUCTION) || "null"
   );
 
-  const useNameSaved = localStorage.getItem(NAME_USER);
-  const [username, setUsername] = useState(useNameSaved || '******');
+  const { data: infosUser } = useFetchGetInfosUser()
 
-  const requestUsername = () => {
-    if (!useNameSaved) {
-        verifyTokenService.user().then(response => {
-            const { name } = response.data.user;
-            if(name){
-                setUsername(name)
-                localStorage.setItem(NAME_USER, name);
-            }
-        });
-    }
-  };
-
-  useEffect(requestUsername, []);
 
   return (
     <>
       <Header painel={{ logout: true, playQuizzes: true }} />
       <Container>
         <P.PainelScreen>
+          <HeaderUserConfigs
+            imgProfile={infosUser?.profilePicture || ""}
+          />
           <section className="apresentation-container">
             <div className="card-apresentation">
               <div className="block-code-lines">
@@ -52,7 +41,7 @@ export default function PainelScreen() {
                 <p>
                   <span style={{ color:'#1967d2'}}>console.log</span>
                   (<span style={{color:"#188038"}}>
-                    "Olá, <span className="capitalize">{username}</span>! 
+                    "Olá, <span className="capitalize">{infosUser?.name || "***"}</span>! 
                   Vamos criar um desafio incrível com os seus conhecimentos?"
                   </span>)
                 </p>

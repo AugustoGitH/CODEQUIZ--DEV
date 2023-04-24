@@ -1,33 +1,26 @@
 import React, {useEffect, useState } from "react";
-import moment from 'moment';
-import { useNavigate } from "react-router-dom";
 
 import Header from "../../components/Header";
 import Container from "../../components/Container";
 import Checkboxes from "../../components/Checkboxes";
 
-import { IQuiz } from "../../interfaces/IQuiz";
-
 import * as Q from "./styles";
 
-import formatTime from "../../utils/fomatTime";
 
 
 import configsCreatingQuiz from "../../settings/quiz/configs"
 import LoaderSpinner from "../../components/LoaderSpinner";
 import { useQuizzes } from "../../stores/listQuizzes";
 import Footer from "../../components/Footer";
+import CardQuiz from "./components/CardQuiz";
+
 
 function FilterQuizzes() {
   const [attrFilter, setAttrFilter] = useState({
     technology: "",
     difficulty: "",
   });
-  // const { filterQuizzes } =
-  //   useContext(ListQuizzesContext);
-
   const { filterQuizzes } = useQuizzes()
-
 
   const handleChangeButtonFilter = (attr: "technology" | "difficulty", value: string)=> {
     setAttrFilter(prevAttrs=> ({...prevAttrs, [attr]: value }))
@@ -75,60 +68,15 @@ function FilterQuizzes() {
 }
 
 
-function Quiz({ quiz }: { quiz: IQuiz }) {
-  const [isHover, setIsHover] = useState(false);
-  const navigate = useNavigate()
-
-  const tratedTimeQuuestion = quiz.questionTime ? formatTime(quiz.questionTime) : "***"
-
-  const tratedDate = quiz.createdAt ? 
-    moment(new Date(quiz.createdAt)).format("DD/MM/YYYY") : "***"
-
-  return (
-    <li
-      className="quiz-game"
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-      onClick={()=> navigate(`/quizzes/${quiz.id}`)}
-    >
-      <div className="cover">
-        {isHover ? (
-          <button className="button-play-quiz">
-            <i className='bx bxl-play-store'></i>
-            
-          </button>
-        ) : (
-          <i className={`bx bxl-${
-            quiz.technology === "javascript" ? "javascript" :
-            quiz.technology === "css" ? "css3" : 
-            quiz.technology === "html" ? "html5" : ""
-          } icon-tech`
-          }></i>
-        )}
-      </div>
-      <div className="description">
-        <ul className="quiz-tags">
-          <li>{ quiz.technology }</li>
-          <li>{ quiz.difficulty }</li>
-        </ul>
-        <span className="display-time">
-            Tempo: {tratedTimeQuuestion}
-        </span>
-        <span className="display-data">Data de criação: { tratedDate } </span>
-      </div>
-    </li>
-  );
-}
 
 
 function ListQuizzes() {
   const { quizzesToScreen, isFetching } = useQuizzes()
-
   return (
     <Q.ListQuizzes>
       <ul>
         {quizzesToScreen?.map((quiz) => (
-          <Quiz quiz={quiz} key={quiz.id} />
+          <CardQuiz quiz={quiz} key={quiz.id} />
         ))}
       </ul>
       {

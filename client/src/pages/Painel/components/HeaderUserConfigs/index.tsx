@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react"
 import ProfilePictureSelection from "../../../../components/ProfilePictureSelection"
 import * as S from "./styles"
+import userSettings from "../../../../settings/user"
 
 
 interface IPropsHeaderUserConfigs{
-  imgProfile: string
+  imgProfile: string | undefined
 }
 
 const HeaderUserConfigs = ({ imgProfile }: IPropsHeaderUserConfigs)=>{
   const [showSelectImage, setShowSelectImage] = useState(false)
-  const [imageProfile, setImageProfile] = useState(imgProfile)
+  const [imageProfile, setImageProfile] = useState(userSettings.profileDefault)
 
   useEffect(()=>{
-    setImageProfile(imgProfile)
+    if(imgProfile){
+      setImageProfile(imgProfile)
+    }
   }, [imgProfile])
 
   return (

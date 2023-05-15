@@ -28,9 +28,11 @@ export const ProfilePictureSelection = styled.div`
 
     align-items: center;
     position: relative;
-    h3{
-      text-transform: uppercase;
-      margin-bottom: 1rem;
+    @media (max-width: 700px) {
+      width: 100%;
+    }
+    @media (max-width: 460px) {
+      height: 380px;
     }
     .button-close, .button-close-focus{
       position: absolute;
@@ -63,6 +65,10 @@ export const ProfilePictureSelection = styled.div`
       object-fit: cover;
       ${animationsPresence.scale};
       border: 1.4px solid #00000013;
+      @media (max-width: 460px) {
+        width: 150px;
+        height: 150px;
+      }
     }
     .button-select-image{
       all: unset;
@@ -84,6 +90,9 @@ export const ProfilePictureSelection = styled.div`
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 1.2rem;
+      @media (max-width: 460px) {
+        gap: .8rem;
+      }
       li{
         border: 1.4px solid #00000013;
         border-radius: .6rem;
@@ -95,6 +104,10 @@ export const ProfilePictureSelection = styled.div`
         cursor: pointer;
         overflow: hidden;
         ${animationsPresence.scale};
+        @media (max-width: 460px) {
+          width: 90px;
+          height: 90px;
+        }
         &:hover{
           img{
             transform: scale(1.5);

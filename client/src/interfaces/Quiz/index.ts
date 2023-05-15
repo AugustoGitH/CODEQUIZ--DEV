@@ -53,7 +53,11 @@ export interface IAnswerSentByServer {
   answersCorrectly: IAnswerServerQuestion[]
 }
 
-
+export interface IAchievementSentByServer{
+  name: string,
+  message: string,
+  type: "trofeu" | "medal"
+}
 
 // -------------- ----- --------------
 

@@ -1,14 +1,16 @@
 import { 
-  IAnswersServer, 
+  IAnswerServerQuestion,
   IDifficultyLevel, 
   IQuestion, 
   ITechnology 
 } from "../../interfaces/IQuiz"
 
-export interface IPlayerAnswer {
+export interface IMatchHistoryPlayer {
   isUser: boolean,
-  idPlayer?: string,
-  answer: IAnswersServer
+  idPlayer: string | null,
+  answers: IAnswerServerQuestion[],
+  timeAverage: number,
+  departureDate: Date
 }
 
 export interface IQuizModel{
@@ -19,5 +21,5 @@ export interface IQuizModel{
   questionTime: number,
   createdAt: Date,
   completedMatches: number,
-  matchHistory: IPlayerAnswer[]
+  matchHistory: IMatchHistoryPlayer[]
 }

@@ -1,24 +1,29 @@
 /* eslint-disable max-len */
-import { IAnswerSentByServer } from "../../../../interfaces/Quiz";
+import { useEffect, useState } from "react";
+import { IAchievementSentByServer, IAnswerSentByServer } from "../../../../interfaces/Quiz";
 import { IIssueResolutionTime } from "../../../../interfaces/Quiz/IQuizMatch";
 import * as S from "./styles";
 import { Link } from "react-router-dom";
 
+import ImageTrofeu from "../../../../assets/images/trofeu.png"
+import ImageMedalha from "../../../../assets/images/medalha.png"
 
 interface IPropsScreenFinished {
   onRestartGame: ()=> void,
   onReviewGame: ()=> void
   serverAnswers: IAnswerSentByServer,
-  issueResolutionTime: IIssueResolutionTime[]
+  issueResolutionTime: IIssueResolutionTime[],
+  achievement: IAchievementSentByServer | null
 }
 
 export default function ScreenFinished({
   onRestartGame,
   serverAnswers,
   issueResolutionTime,
-  onReviewGame
+  onReviewGame,
+  achievement
 }: IPropsScreenFinished) {
-
+  const [showPopUpAchievement, setShowPopUpAchievement] = useState(false)
 
   const matchData = {
     sumOfResolutionTimes: issueResolutionTime
@@ -27,7 +32,7 @@ export default function ScreenFinished({
     amountOfQuestions: serverAnswers.answersCorrectly.length,
 
     averageResolutionTime(){
-      return Math.floor(this.sumOfResolutionTimes / this.amountOfQuestions)
+      return Number((this.sumOfResolutionTimes / this.amountOfQuestions).toFixed(1))
     },
 
     numberOfNullResponses: serverAnswers.answersCorrectly
@@ -41,11 +46,33 @@ export default function ScreenFinished({
     }
   } 
 
+  useEffect(()=>{
+    if(achievement){
+      setShowPopUpAchievement(true)
+    }
+  }, [achievement])
+
 
 
   
   return (
       <S.ScreenFinished>
+        {
+          showPopUpAchievement && achievement ? (
+            <S.Achievement>
+              <div className="card">
+                <p>{achievement?.message}</p>
+                <div className="circle-premium">
+                  <img 
+                    onClick={()=> setShowPopUpAchievement(false) }
+                    id="trofeu-image" 
+                    src={achievement.type === "medal" ? ImageMedalha : achievement.type === "trofeu" ? ImageTrofeu : ""}
+                  />
+                </div>
+              </div>
+            </S.Achievement>
+          ) : <></>
+        }
         <div className="card-start-game">
           <h1>
             <i className='bx bx-code-alt'></i> 
@@ -76,15 +103,15 @@ export default function ScreenFinished({
                     </div>
                     <div className="infos-description">
                         <h4>Questões Anuladas</h4>
-                        <p>{ matchData.numberOfNullResponses } questões</p>
+                        <p>{matchData.numberOfNullResponses === 1 ? "Uma questão" : `${matchData.numberOfNullResponses} questões`} </p>
                     </div>
                 </li>
-                <li>
+                <li className="review-answer">
                     <div className="infos-icon">
-                            {matchData.hitPercentage()}
+                    <i className='bx bxs-pie-chart-alt-2'></i>
                     </div>
                     <div className="infos-description">
-                        <h4>De acertos</h4>
+                        <h4>{matchData.hitPercentage()} de acertos</h4>
                         <p>
                           {`
                             Você acertou ${matchData.amountOfHits} de ${matchData.amountOfQuestions} questões
@@ -94,14 +121,13 @@ export default function ScreenFinished({
                 </li>
                 <li>
                     <div className="infos-icon">
-                      <i className='bx bx-revision'></i>
+                      <button onClick={onReviewGame}><i className='bx bx-revision'></i></button>
                     </div>
                     <div className="infos-description">
                         <h4>Revise suas respostas</h4>
-                        <button onClick={onReviewGame}>revise</button>
+                        <p>Clique no botão para revisar</p>
                     </div>
                 </li>
-
             </ul>
           <nav>
             <button onClick={onRestartGame}>

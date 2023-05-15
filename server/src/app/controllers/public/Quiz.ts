@@ -3,8 +3,8 @@ import Quiz from '../../../db/models/Quiz'
 import { Request, Response } from 'express'
 import { refactoringQuizPublic } from '../../../utils/quiz/refactoringQuizes'
 import {
+  IAchievementSentByServer,
   IAnswerPlayer,
-  ICorrectAnswer,
   IAnswersServer,
   IQuizSentToCustomer,
 } from '../../../interfaces/IQuiz'
@@ -14,6 +14,7 @@ import quizCreatingSettings from '../../../settings/quizCreating'
 import checkQuestionsCorrectly from '../../../utils/quiz/checkQuestionsCorrectly'
 import recordMatchData from '../../../db/utils/quiz/recordMatchData'
 import User from '../../../db/models/User'
+import checkAndSaveUserGame from '../../../utils/quiz/checkAndSaveUserGame'
 
 
 export default {
@@ -54,8 +55,9 @@ export default {
   async checkAnswers(req: Request, res: Response) {
     const answersPlayer: IAnswerPlayer = req.body
 
-    const { idQuiz, answers: playerAnswers } = answersPlayer
+    const { idQuiz, answers: playerAnswers, timeAverage } = answersPlayer
     const { limitedQuestions } = quizCreatingSettings.configs
+
 
     try {
       const quiz = await Quiz.findById({ _id: idQuiz })
@@ -66,14 +68,8 @@ export default {
       })
 
 
-      const correctAnswers: ICorrectAnswer[] = quiz.questions.map((quest) => ({
-        idQuestion: quest.id,
-        idAlternative:
-          quest.alternatives.find((alt) => alt.correct)?.id || null,
-      }))
-
       const answersQuestionsServer = checkQuestionsCorrectly(
-        correctAnswers,
+        quiz.questions,
         playerAnswers
       )
 
@@ -89,15 +85,20 @@ export default {
         answersCorrectly: answersQuestionsServer,
       }
 
-      await recordMatchData({
+      const currentMatch = await recordMatchData({
         authToken: req.cookies[process.env?.NAME_TOKEN_AUTORIZATION || ""] || "",
-        resolvedPlayerAnswer: answersServer
+        resolvedPlayerAnswer: {
+          ...answersServer,
+          timeAverage
+        }
       })
+  
+      const achievement: IAchievementSentByServer | null = await checkAndSaveUserGame({ currentMatch, quiz })
 
       res.status(200).send({
         message:
           'As respostas do quiz foram tratadas e verificadas com sucesso!',
-        data: { answer: answersServer },
+        data: { answer: answersServer, achievement },
       })
 
     } catch (error) {

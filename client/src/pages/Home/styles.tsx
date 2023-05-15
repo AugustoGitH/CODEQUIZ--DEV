@@ -27,7 +27,7 @@ const Apresentation = styled.section`
       position: absolute;
       font-size: 2rem;
       @media (max-width: 500px) {
-        font-size: 1.4rem;
+       display: none;
       }
     }
     .icon-react{
@@ -108,17 +108,17 @@ const StartGame = styled.section`
       justify-content: center;
       h1 {
         font-size: var(--font-size-super-large);
-        line-height: 2.1rem;
+        line-height: 1.9rem;
         text-transform: uppercase;
         letter-spacing: -0.1rem;
         @media (max-width: 500px) {
           font-size: var(--font-size-large);
-          line-height: 1.9rem;
+          line-height: 1.6rem;
         }
         span {
           background: #282a36;
           color: #fff;
-          padding: 0.3rem;
+          padding: 0.2rem 0.4rem;
           border-radius: 0.3rem;
         }
       }

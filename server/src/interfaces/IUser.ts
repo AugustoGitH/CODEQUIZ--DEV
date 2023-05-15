@@ -1,8 +1,10 @@
+
 export interface IUser {
   name: string
   email: string
   password: string,
-  profilePicture: string
+  profilePicture: string,
+  achievements: string[]
 }
 
 export interface IUserSentToClient{

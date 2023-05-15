@@ -5,6 +5,7 @@ import configsCreatingQuiz from '../../settings/quiz/configs'
 import quizServices from '../../services/public/Quiz'
 import useFetchQuiz from '../../queries/quiz/public/quiz'
 import { 
+  IAchievementSentByServer,
   IAnswerSentByServer, 
   IQuestion, 
   IQuizSentToCustomer 
@@ -30,6 +31,8 @@ const useGame = (quiz: IQuizSentToCustomer | undefined) => {
   >([])
 
   const [serverAnswers, setServerAnswers] = useState<IAnswerSentByServer | null>(null)
+  const [achievement, setAchievement] = useState<IAchievementSentByServer | null>(null)
+
   const [isWaintingAnswer, setIsWaintingAnswer] = useState<boolean | null>(null)
 
   // eslint-disable-next-line max-len
@@ -75,11 +78,15 @@ const useGame = (quiz: IQuizSentToCustomer | undefined) => {
         .checkAnswers({
           idQuiz: quiz.id,
           answers: playerAnswers,
+          timeAverage: issueResolutionTime
+            .map(issue=> issue.timeInSeconds )
+            .reduce((accVl, currVl)=> currVl + accVl) / issueResolutionTime.length
         })
         .then((response) => {
           if (!response.answers) return alert(response.message)
           setIsWaintingAnswer(false)
           setServerAnswers(response.answers)
+          setAchievement(response.achievement)
         })
     }
   }, [playerAnswers])
@@ -151,6 +158,7 @@ const useGame = (quiz: IQuizSentToCustomer | undefined) => {
 
   // Inicializar o game
   const startGame = () => {
+    messUpQuestions()
     setCurrentTimeQuestion(timeToAskQuestions)
     setIsGameStarted(true)
     setCurrentQuestions(0)
@@ -159,6 +167,7 @@ const useGame = (quiz: IQuizSentToCustomer | undefined) => {
 
   // Reinicializar o game
   const restartGame = () => {
+    messUpQuestions()
     setIssueResolutionTime([])
     setPlayerAnswers([])
     setServerAnswers(null)
@@ -186,6 +195,18 @@ const useGame = (quiz: IQuizSentToCustomer | undefined) => {
     alternativeAnswered(responseAlternative)
   }
 
+  const messUpQuestions = ()=>{
+    if(!quiz) return
+    const { questions } = quiz
+
+    questions.sort((question)=>{
+      question.alternatives.sort(()=> Math.random() - 0.5)
+      return Math.random() - 0.5
+    })
+    
+  }
+ 
+
   return {
     startGame,
     isGameStarted,
@@ -201,7 +222,8 @@ const useGame = (quiz: IQuizSentToCustomer | undefined) => {
     reviewGame,
     isReviewGame,
     playerAnswers,   
-    backToFinalResults
+    backToFinalResults,
+    achievement
   }
 }
 

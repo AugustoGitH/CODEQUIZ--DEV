@@ -19,6 +19,7 @@ const quizCreating_1 = __importDefault(require("../../../settings/quizCreating")
 const checkQuestionsCorrectly_1 = __importDefault(require("../../../utils/quiz/checkQuestionsCorrectly"));
 const recordMatchData_1 = __importDefault(require("../../../db/utils/quiz/recordMatchData"));
 const User_1 = __importDefault(require("../../../db/models/User"));
+const checkAndSaveUserGame_1 = __importDefault(require("../../../utils/quiz/checkAndSaveUserGame"));
 exports.default = {
     getQuizzesPublic(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -51,7 +52,7 @@ exports.default = {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const answersPlayer = req.body;
-            const { idQuiz, answers: playerAnswers } = answersPlayer;
+            const { idQuiz, answers: playerAnswers, timeAverage } = answersPlayer;
             const { limitedQuestions } = quizCreating_1.default.configs;
             try {
                 const quiz = yield Quiz_1.default.findById({ _id: idQuiz });
@@ -59,14 +60,7 @@ exports.default = {
                     return res.status(404).send({
                         message: 'Quiz não encontrado!',
                     });
-                const correctAnswers = quiz.questions.map((quest) => {
-                    var _a;
-                    return ({
-                        idQuestion: quest.id,
-                        idAlternative: ((_a = quest.alternatives.find((alt) => alt.correct)) === null || _a === void 0 ? void 0 : _a.id) || null,
-                    });
-                });
-                const answersQuestionsServer = (0, checkQuestionsCorrectly_1.default)(correctAnswers, playerAnswers);
+                const answersQuestionsServer = (0, checkQuestionsCorrectly_1.default)(quiz.questions, playerAnswers);
                 if (answersQuestionsServer.length !== limitedQuestions)
                     return res.status(500).send({
                         message: 'Ocorreu um erro interno no servidor! Contate o desenvolvedor!',
@@ -75,13 +69,14 @@ exports.default = {
                     idQuiz,
                     answersCorrectly: answersQuestionsServer,
                 };
-                yield (0, recordMatchData_1.default)({
+                const currentMatch = yield (0, recordMatchData_1.default)({
                     authToken: req.cookies[((_a = process.env) === null || _a === void 0 ? void 0 : _a.NAME_TOKEN_AUTORIZATION) || ""] || "",
-                    resolvedPlayerAnswer: answersServer
+                    resolvedPlayerAnswer: Object.assign(Object.assign({}, answersServer), { timeAverage })
                 });
+                const achievement = yield (0, checkAndSaveUserGame_1.default)({ currentMatch, quiz });
                 res.status(200).send({
                     message: 'As respostas do quiz foram tratadas e verificadas com sucesso!',
-                    data: { answer: answersServer },
+                    data: { answer: answersServer, achievement },
                 });
             }
             catch (error) {

@@ -1,7 +1,5 @@
 /* eslint-disable max-len */
-import React, { useState } from "react"
 import Header from "../../components/Header"
-import AceEditor from "../../components/AceEditor"
 import imageLogo from "../../assets/images/logo.png"
 
 
@@ -13,7 +11,6 @@ import Footer from "../../components/Footer";
 import Container from "../../components/Container";
 
 const Home = ()=>{
-    const [showButton, setShowButton] = useState(false);
 
     return (
         <>

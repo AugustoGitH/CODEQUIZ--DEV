@@ -1,7 +1,7 @@
 
 // -------------- Geral --------------
 
-import { IPlayerAnswer } from "../db/interfaces/IQuizModel"
+import { IMatchHistoryPlayer } from "../db/interfaces/IQuizModel"
 
 
 
@@ -70,7 +70,7 @@ export interface IQuizSentToUser {
   questionTime: number
   createdAt: Date,
   completedMatches: number,
-  matchHistory: IPlayerAnswer[]
+  matchHistory: IMatchHistoryPlayer[]
 }
 
 // -------------- ----- --------------
@@ -95,7 +95,8 @@ export interface IAnswerPlayerQuestion {
 
 export interface IAnswerPlayer {
   idQuiz: string
-  answers: IAnswerPlayerQuestion[]
+  answers: IAnswerPlayerQuestion[],
+  timeAverage: number
 }
 
 // -------------- ----- --------------
@@ -116,6 +117,12 @@ export interface IAnswersServer {
   answersCorrectly: IAnswerServerQuestion[]
 }
 
+export interface IAchievementSentByServer{
+  name: string,
+  message: string,
+  type: "trofeu" | "medal"
+}
+
 // -------------- ----- --------------
 
 // -------------- ----- --------------
@@ -124,3 +131,4 @@ export interface ICorrectAnswer {
   idAlternative: string | null
   idQuestion: string
 }
+

@@ -40,7 +40,7 @@ export const ScreenPrevGame = styled.div`
       letter-spacing: -.1rem;
       position: absolute;
       top: -1.1rem;
-      
+      justify-content: center;
       background-color: var(--color-gray-light);
       padding: .4rem 1rem;
       border-radius: .4rem;
@@ -119,8 +119,10 @@ export const ScreenPrevGame = styled.div`
           justify-content: start;
           h4 {
             font-size: var(--font-size-medium);
+            line-height: 1.2rem;
             @media (max-width: 500px) {
               font-size: var(--font-size-small);
+              line-height: 1.1rem;
             }
           }
           p {

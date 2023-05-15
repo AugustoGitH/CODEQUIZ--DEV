@@ -2,18 +2,27 @@
 
 import {
     IAnswerPlayerQuestion,
-    ICorrectAnswer,
     IAnswerServerQuestion,
+    ICorrectAnswer,
+    IQuestion,
   } from '../../interfaces/IQuiz'
 import quizCreatingSettings from '../../settings/quizCreating'
 
 export default function checkQuestionsCorrectly(
-    correctAnswers: ICorrectAnswer[],
+    originQuestions: IQuestion[],
     playerResonses: IAnswerPlayerQuestion[]
   ) {
     const { limitedQuestions } = quizCreatingSettings.configs
     const tratedPlayerResponses = playerResonses.slice(0, limitedQuestions)
   
+
+    const correctAnswers: ICorrectAnswer[] = originQuestions.map((quest) => ({
+      idQuestion: quest.id,
+      idAlternative:
+        quest.alternatives.find((alt) => alt.correct)?.id || null,
+    }))
+
+
     const answersQuestionsServer: IAnswerServerQuestion[] =
       tratedPlayerResponses.map((question) => {
         const correct =
@@ -28,6 +37,7 @@ export default function checkQuestionsCorrectly(
             correct,
           },
         }
-      })
+    })
+    
     return answersQuestionsServer
   }

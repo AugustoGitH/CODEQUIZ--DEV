@@ -39,8 +39,10 @@ export default function PageQuiz() {
          isReviewGame,
          reviewGame,
          playerAnswers,
-         backToFinalResults
+         backToFinalResults,
+         achievement
     } = useQuizGame(idQuiz || "")
+
 
   if (isFetching && !quiz || isGameFinished && isWaintingAnswer ) return <PageLoaded/>;
   if (!isFetching && !quiz) return <PageNotFound />;
@@ -50,9 +52,15 @@ export default function PageQuiz() {
       <Header position="sticky">
         {
           isGameStarted && !isGameFinished && quiz  && !isReviewGame  ? (
-            <code style={{fontSize: "1.1rem"}}>
-              <i className='bx bxs-timer' ></i>{currentTimeQuestion}s
-            </code>
+            <p style={{
+              fontSize: "1.1rem",
+              display: "flex", 
+              alignItems:"center", 
+              gap: ".4rem"
+            }}>
+              <img width="20px" src="https://i.gifer.com/XVo6.gif"/>
+              <i>{currentTimeQuestion}s</i>
+            </p>
           ) : <></>
         }
       </Header>
@@ -84,8 +92,9 @@ export default function PageQuiz() {
                 <ScreenFinished 
                     onRestartGame={ restartGame }
                     serverAnswers={ serverAnswers }
-                    issueResolutionTime = { issueResolutionTime }
-                    onReviewGame = {reviewGame}
+                    issueResolutionTime={ issueResolutionTime }
+                    onReviewGame={ reviewGame }
+                    achievement={ achievement }
                 />
             ) : <></>
         }

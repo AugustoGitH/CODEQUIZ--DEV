@@ -52,7 +52,7 @@ export default function Question({
                     "flexbox-alternatives" : "grid-alternatives"
                 } ${timeOver ? "locked-alternatives" : ""}`}>
                     {
-                        question.alternatives.map(alternative=>(
+                        question.alternatives.map((alternative, index)=>(
                             <li 
                                 className="alternative"
                                 key={alternative.id}
@@ -63,7 +63,7 @@ export default function Question({
                                     })
                                 }}
                             >
-                                <span>{ alternative.letter }</span>
+                                <span>{ "ABCD"[index] }</span>
                                 <p>{ alternative.value }</p>
                             </li>
                         ))

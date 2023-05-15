@@ -46,7 +46,7 @@ function Question({ question, current, altCorrect, altIncorrect }: IPropsQuestio
               : 'grid-alternatives'
           }`}
         >
-          {question.alternatives.map((alternative) => (
+          {question.alternatives.map((alternative, index) => (
             <li 
               key={alternative.id} 
               className={`
@@ -56,7 +56,7 @@ function Question({ question, current, altCorrect, altIncorrect }: IPropsQuestio
                 }
               `}
             >
-              <span>{alternative.letter}</span>
+              <span>{"ABCD"[index]}</span>
               <p>{alternative.value}</p>
             </li>
           ))}

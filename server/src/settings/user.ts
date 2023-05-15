@@ -1,5 +1,6 @@
 export default {
   profileDefault: "https://art.pixilart.com/74157f3852ebf72.png",
+  hoursToGetAchievement: 68,
   profilePictureOptions: [
     "https://i.pinimg.com/564x/e7/b1/27/e7b127d2aa8513bdc043dde3d5eb809d.jpg",
     "https://i.pinimg.com/564x/58/5a/d4/585ad4c00b80ed65905e89da0a04e11d.jpg",

@@ -24,7 +24,7 @@ export const ScreenFinished = styled.div`
     ${animationsPresence.scale};
     position: relative;
     width: 800px;
-    @media (max-width: 730px) {
+    @media (max-width: 860px) {
       width: 100%;
     }
     @media (max-width: 640px) {
@@ -35,6 +35,7 @@ export const ScreenFinished = styled.div`
       text-transform: uppercase;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
       line-height: 1.5rem;
       letter-spacing: -.1rem;
@@ -65,7 +66,7 @@ export const ScreenFinished = styled.div`
     ul {
       width: 100%;
       display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: .5rem;
       li {
         display: flex;
@@ -80,7 +81,7 @@ export const ScreenFinished = styled.div`
         cursor: default;
         transition: 0.2s;
         @media (max-width: 500px) {
-          height: 100px;
+          height: 120px;
           box-shadow: 2px 2px var(--color-dark);
         }
         &:hover {
@@ -110,6 +111,31 @@ export const ScreenFinished = styled.div`
           @media (max-width: 500px) {
             font-size: 1.7rem;
           }
+          button{
+            all: unset;
+            flex: none;
+            width: 29px;
+            height: 29px;
+            font-size: 1.1rem;
+            background-color: var(--color-dark);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1.4px solid var(--color-dark);
+            cursor: pointer;
+            
+            transition: .2s;
+            i{ transition: transform .2s }
+            &:hover{
+              background-color: transparent;
+              color: var(--color-dark);
+              i{
+                transform: rotate(-80deg);
+              }
+            }
+          }
         }
         .infos-icons-stars {
           font-size: 1.3rem;
@@ -121,23 +147,6 @@ export const ScreenFinished = styled.div`
             font-size: var(--font-size-medium);
             @media (max-width: 500px) {
               font-size: var(--font-size-small);
-            }
-          }
-          button{
-            all: unset;
-            font-size: var(--font-size-small);
-            color: var(--color-info);
-            border-radius: .3rem;
-            cursor: pointer;
-            transition: .2s;
-            font-size: var(--font-size-small);
-            font-family: var(--font-Consolas);
-            @media (max-width: 500px) {
-              font-size: var(--font-size-super-small);
-            }
-            text-decoration: underline;
-            &:hover{
-              text-decoration: none;
             }
           }
           p {
@@ -225,4 +234,85 @@ export const ScreenFinished = styled.div`
       }
     }
   }
+`
+
+export const Achievement = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00000016;
+  .card{
+    flex: none;
+    max-width: 600px;
+    background-color: var(--color-gray-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    border: 1.5px solid #00000035;
+    ${animationsPresence.scale};
+    .circle-premium{
+      background-color: transparent;
+      /* width: 120px;
+      height: 120px; */
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      position: relative;
+      justify-content: center;
+      &::after{
+        content: "Guardar no mural de conquistas";
+        color: #fff;
+        position: absolute;
+        background-color: var(--color-dark);
+        width: 270px;
+        border-radius: .3rem;
+        padding: .2rem 0;
+        text-transform: uppercase;
+        font-size: .8rem;
+        bottom: -2.5rem;
+        opacity: 0;
+        transform: translateY(-50px);
+        transition: .3s;
+      }
+      &:hover{
+        &::after{
+          opacity: 1;
+          transform: translateY(0px);
+        }
+      }
+      #medalha-image{
+        width: 120px;
+      }
+      #trofeu-image{
+        width: 90px;
+      }
+      img{
+        margin-top: .6rem;
+        transition: .2s;
+        cursor: pointer;
+        &:hover{
+        transform: scale(1.2);
+      }
+      }
+      
+    }
+
+    p{
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+      font-family: var(--font-Consolas);
+      white-space: break-spaces;
+    }
+  }
+
 `

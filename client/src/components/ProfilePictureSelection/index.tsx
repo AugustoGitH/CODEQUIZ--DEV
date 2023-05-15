@@ -48,7 +48,6 @@ const ProfilePictureSelection = ({ show, onClose, onReplaceProfile }: IPropsProf
         {
           !imageSelected ? (
             <>
-              <h3>Selecione a imagem para o seu perfil</h3>
               <ul className="images-options">
               {
                 imagesOptions?.map((image, index)=>(

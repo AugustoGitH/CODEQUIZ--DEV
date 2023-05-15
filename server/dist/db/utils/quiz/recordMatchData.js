@@ -17,24 +17,24 @@ const Quiz_1 = __importDefault(require("../../models/Quiz"));
 function recordMatchData({ resolvedPlayerAnswer, authToken }) {
     return __awaiter(this, void 0, void 0, function* () {
         const { isUser, idUser } = (0, verifyCredentials_1.default)(authToken, process.env.TOKEN_SECRET || "");
-        const { answersCorrectly, idQuiz } = resolvedPlayerAnswer;
+        const { answersCorrectly, idQuiz, timeAverage } = resolvedPlayerAnswer;
+        const matchHistoryModel = {
+            isUser,
+            idPlayer: idUser,
+            answers: answersCorrectly,
+            departureDate: new Date(),
+            timeAverage
+        };
         try {
             yield Quiz_1.default.updateOne({ _id: idQuiz }, {
-                $inc: {
-                    completedMatches: 1
-                },
-                $push: {
-                    matchHistory: {
-                        isUser,
-                        idPlayer: idUser,
-                        answers: answersCorrectly
-                    }
-                },
+                $inc: { completedMatches: 1 },
+                $push: { matchHistory: matchHistoryModel },
             });
+            return matchHistoryModel;
         }
         catch (error) {
             console.log(error);
-            throw new Error("Erro interno do servidor ao capturar resposta do player.");
+            return null;
         }
     });
 }

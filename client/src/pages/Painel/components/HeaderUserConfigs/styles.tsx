@@ -32,7 +32,7 @@ export const HeaderUserConfigs = styled.div`
         border-radius: .3rem;
         z-index: 1;
         bottom: -1.8rem;
-        right: -52%;
+        right: -50%;
         text-transform: uppercase;
         transform: translateY(-17px);
         opacity: 0;

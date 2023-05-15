@@ -8,7 +8,8 @@ export interface IAnswerPlayerQuestion{
 
 export interface IAnswerPlayer {
   idQuiz: string
-  answers: IAnswerPlayerQuestion[]
+  answers: IAnswerPlayerQuestion[],
+  timeAverage: number
 }
 
 export interface IIssueResolutionTime {

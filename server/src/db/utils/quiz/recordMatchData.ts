@@ -1,35 +1,39 @@
 import { IAnswersServer } from "../../../interfaces/IQuiz"
 import verifyCredentials from "../../../utils/verifyCredentials"
-import { IQuizModel } from "../../interfaces/IQuizModel"
+import { IMatchHistoryPlayer, IQuizModel } from "../../interfaces/IQuizModel"
 import Quiz from "../../models/Quiz"
 
 
 interface IParamsRecordMatchData {
-  resolvedPlayerAnswer: IAnswersServer,
+  resolvedPlayerAnswer: IAnswersServer & { timeAverage: number },
   authToken: string
 }
 
 
 async function recordMatchData(
-  { resolvedPlayerAnswer, authToken }: IParamsRecordMatchData){
+  { resolvedPlayerAnswer, authToken }: 
+    IParamsRecordMatchData): Promise<IMatchHistoryPlayer | null>{
+
   const { isUser, idUser } = verifyCredentials(authToken, process.env.TOKEN_SECRET || "")
-  const { answersCorrectly, idQuiz } = resolvedPlayerAnswer
+  const { answersCorrectly, idQuiz, timeAverage } = resolvedPlayerAnswer
+
+  const matchHistoryModel: IMatchHistoryPlayer = {
+    isUser,
+    idPlayer: idUser,
+    answers: answersCorrectly,
+    departureDate: new Date(),
+    timeAverage
+  }
+
   try{
     await Quiz.updateOne({ _id: idQuiz }, {
-      $inc: {
-        completedMatches: 1
-      } as IQuizModel,
-      $push: {
-        matchHistory: {
-          isUser,
-          idPlayer: idUser,
-          answers: answersCorrectly
-        }
-      },
+      $inc: { completedMatches: 1 } as IQuizModel,
+      $push: { matchHistory: matchHistoryModel },
     })
+    return matchHistoryModel
   }catch(error){
     console.log(error)
-    throw new Error("Erro interno do servidor ao capturar resposta do player.")
+    return null
   }
 }
 

@@ -27,7 +27,7 @@ export default function PainelScreen() {
       <Container>
         <P.PainelScreen>
           <HeaderUserConfigs
-            imgProfile={infosUser?.profilePicture || ""}
+            imgProfile={infosUser?.profilePicture}
           />
           <section className="apresentation-container">
             <div className="card-apresentation">

@@ -1,19 +1,17 @@
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
+import type { SubmitHandler, FieldValues } from 'react-hook-form';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Container from '../../components/Container';
 import Header from '../../components/Header';
 import Input from '../../components/Input';
-import BlockCodeForm from './components/BlockCodeForm';
-
+import useFetchVerifyCredential from '../../queries/verifyCredential';
 import authenticationSchemas from '../../schemas/authentication';
 import authenticationService from '../../services/public/Authentication';
-
-import type { SubmitHandler, FieldValues } from 'react-hook-form';
-
+import BlockCodeForm from './components/BlockCodeForm';
 import { RegisterScreenStyled } from './styles';
-import useFetchVerifyCredential from '../../queries/verifyCredential';
 
 
 function FormRegister() {
@@ -24,7 +22,7 @@ function FormRegister() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(authenticationSchemas.register) });
 
-  const register: SubmitHandler<FieldValues> = (data)=> {
+  const register: SubmitHandler<FieldValues> = (data) => {
     const { email, name, password } = data
     authenticationService.register({ email, name, password }).then(response => {
       const { status, message } = response;
@@ -42,8 +40,8 @@ function FormRegister() {
           <Input
             onChange={onChange}
             label="apelido"
-            error={ !!errors.name }
-            helperText={ errors.name?.message?.toString() }
+            error={!!errors.name}
+            helperText={errors.name?.message?.toString()}
           />
         )}
       />
@@ -98,7 +96,7 @@ function FormLogin() {
   } = useForm({ resolver: yupResolver(authenticationSchemas.login) });
   const navigate = useNavigate();
 
-  const login:SubmitHandler<FieldValues> = (data)=> {
+  const login: SubmitHandler<FieldValues> = (data) => {
     const { email, password } = data
     authenticationService.login({ email, password }).then(response => {
       const { message, status } = response;

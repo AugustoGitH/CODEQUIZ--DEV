@@ -1,24 +1,28 @@
 /* eslint-disable max-len */
+
 import axios, { AxiosError } from 'axios'
 
 import { routesUser } from '../../routes/user'
 
 interface IResponseChangeProfilePicture {
-  message: string,
+  message: string
   status: boolean
 }
 
-
-
-async function changeProfilePicture(urlImageSelect: string): Promise<IResponseChangeProfilePicture> {
+async function changeProfilePicture(
+  urlImageSelect: string
+): Promise<IResponseChangeProfilePicture> {
   try {
-    const { data } = await axios.post(
-      routesUser.changeProfilePicture,
-      { urlImageSelect }
-    )
+    const { data } = await axios.post(routesUser.changeProfilePicture, {
+      urlImageSelect,
+    })
 
-    return { message: data?.message || "Imagem trocada com sucesso!", status: true }
+    return {
+      message: data?.message || 'Imagem trocada com sucesso!',
+      status: true,
+    }
   } catch (error: unknown) {
+    console.log(error)
     if (error instanceof AxiosError) {
       const { response } = error
       return {

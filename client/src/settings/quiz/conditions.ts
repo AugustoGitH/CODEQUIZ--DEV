@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 
-import { IQuestion } from "../../interfaces/Quiz"
-import { IQuizSentByCustomerCreation } from "../../interfaces/Quiz/IQuizCreation"
+import { IQuestion } from '../../interfaces/Quiz'
+import { IQuizSentByCustomerCreation } from '../../interfaces/Quiz/IQuizCreation'
 
 interface IConditionCreatingQuiz {
   question: IQuestion

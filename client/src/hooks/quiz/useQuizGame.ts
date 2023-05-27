@@ -1,21 +1,18 @@
 import { useEffect, useState } from 'react'
 
-import configsCreatingQuiz from '../../settings/quiz/configs'
-
-import quizServices from '../../services/public/Quiz'
-import useFetchQuiz from '../../queries/quiz/public/quiz'
-import { 
+import {
   IAchievementSentByServer,
-  IAnswerSentByServer, 
-  IQuestion, 
-  IQuizSentToCustomer 
+  IAnswerSentByServer,
+  IQuestion,
+  IQuizSentToCustomer,
 } from '../../interfaces/Quiz'
-
-import { 
-  IAnswerPlayerQuestion, 
-  IIssueResolutionTime 
+import {
+  IAnswerPlayerQuestion,
+  IIssueResolutionTime,
 } from '../../interfaces/Quiz/IQuizMatch'
-
+import useFetchQuiz from '../../queries/quiz/public/quiz'
+import quizServices from '../../services/public/Quiz'
+import configsCreatingQuiz from '../../settings/quiz/configs'
 
 const useGame = (quiz: IQuizSentToCustomer | undefined) => {
   const [isGameStarted, setIsGameStarted] = useState(false)
@@ -26,12 +23,14 @@ const useGame = (quiz: IQuizSentToCustomer | undefined) => {
   const [currentTimeQuestion, setCurrentTimeQuestion] = useState(0)
   const [timeOutForQuestion, setTimeOutForQuestion] = useState(false)
 
-  const [playerAnswers, setPlayerAnswers] = useState<
-    IAnswerPlayerQuestion[]
-  >([])
+  const [playerAnswers, setPlayerAnswers] = useState<IAnswerPlayerQuestion[]>(
+    []
+  )
 
-  const [serverAnswers, setServerAnswers] = useState<IAnswerSentByServer | null>(null)
-  const [achievement, setAchievement] = useState<IAchievementSentByServer | null>(null)
+  const [serverAnswers, setServerAnswers] =
+    useState<IAnswerSentByServer | null>(null)
+  const [achievement, setAchievement] =
+    useState<IAchievementSentByServer | null>(null)
 
   const [isWaintingAnswer, setIsWaintingAnswer] = useState<boolean | null>(null)
 
@@ -40,11 +39,9 @@ const useGame = (quiz: IQuizSentToCustomer | undefined) => {
     IIssueResolutionTime[] | []
   >([])
 
-
   const { limitedQuestions } = configsCreatingQuiz
   const timeToAskQuestions = quiz?.questionTime || 0
   const quantityQuestions = quiz?.questions.length || limitedQuestions
- 
 
   // Verificar se ao trocar a questão por tempo perdido, o jogo possa ter
   // chegado ao final
@@ -78,9 +75,11 @@ const useGame = (quiz: IQuizSentToCustomer | undefined) => {
         .checkAnswers({
           idQuiz: quiz.id,
           answers: playerAnswers,
-          timeAverage: issueResolutionTime
-            .map(issue=> issue.timeInSeconds )
-            .reduce((accVl, currVl)=> currVl + accVl) / issueResolutionTime.length
+          timeAverage:
+            issueResolutionTime
+              .map((issue) => issue.timeInSeconds)
+              .reduce((accVl, currVl) => currVl + accVl) /
+            issueResolutionTime.length,
         })
         .then((response) => {
           if (!response.answers) return alert(response.message)
@@ -95,7 +94,7 @@ const useGame = (quiz: IQuizSentToCustomer | undefined) => {
   const captureLostAnswer = (question: IQuestion | null) => {
     if (!question || !timeToAskQuestions) return
 
-    const lostResponse: IAnswerPlayerQuestion= {
+    const lostResponse: IAnswerPlayerQuestion = {
       idAlternative: null,
       idQuestion: question.id,
     }
@@ -130,9 +129,7 @@ const useGame = (quiz: IQuizSentToCustomer | undefined) => {
   }
 
   // Quando a alternativa é clicada e a questão é respondida
-  const alternativeAnswered = (
-    responseAlternative: IAnswerPlayerQuestion
-  ) => {
+  const alternativeAnswered = (responseAlternative: IAnswerPlayerQuestion) => {
     setPlayerAnswers((preResponses) => [...preResponses, responseAlternative])
     setIssueResolutionTime((prevTimes) => [
       ...prevTimes,
@@ -178,12 +175,12 @@ const useGame = (quiz: IQuizSentToCustomer | undefined) => {
     setTimeOutForQuestion(false)
   }
 
-  const reviewGame = ()=>{
+  const reviewGame = () => {
     setIsReviewGame(true)
     setIsGameFinished(false)
   }
 
-  const backToFinalResults = ()=>{
+  const backToFinalResults = () => {
     setIsReviewGame(false)
     setIsGameFinished(true)
   }
@@ -195,17 +192,15 @@ const useGame = (quiz: IQuizSentToCustomer | undefined) => {
     alternativeAnswered(responseAlternative)
   }
 
-  const messUpQuestions = ()=>{
-    if(!quiz) return
+  const messUpQuestions = () => {
+    if (!quiz) return
     const { questions } = quiz
 
-    questions.sort((question)=>{
-      question.alternatives.sort(()=> Math.random() - 0.5)
+    questions.sort((question) => {
+      question.alternatives.sort(() => Math.random() - 0.5)
       return Math.random() - 0.5
     })
-    
   }
- 
 
   return {
     startGame,
@@ -221,14 +216,13 @@ const useGame = (quiz: IQuizSentToCustomer | undefined) => {
     issueResolutionTime,
     reviewGame,
     isReviewGame,
-    playerAnswers,   
+    playerAnswers,
     backToFinalResults,
-    achievement
+    achievement,
   }
 }
 
-
-const useQuizGame = (idQuiz: string)=>{
+const useQuizGame = (idQuiz: string) => {
   const { data: quiz, isFetching } = useFetchQuiz(idQuiz)
 
   return { quiz, isFetching, ...useGame(quiz) }

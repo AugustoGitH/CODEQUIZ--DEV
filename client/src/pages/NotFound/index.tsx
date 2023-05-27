@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import Container from '../../components/Container';
 
+import Container from '../../components/Container';
 import { NotFoundScreenStyled } from './styles';
 export default function NotFoundScreen() {
   return (

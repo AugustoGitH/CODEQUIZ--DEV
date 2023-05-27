@@ -1,37 +1,35 @@
 import React, { useEffect, useState } from 'react';
 
-import * as S from './styles';
 
 
 import Checkboxes from '../../../../components/Checkboxes';
-
-import { 
-  complementTypes
- } from '../../../../settings/quiz/constants';
-
 import CodeMirrorEditor from '../../../../components/CodeMirrorEditor';
-import models from '../../../../settings/quiz/models';
 import { ITypesComplement } from '../../../../interfaces/Quiz';
+import {
+  complementTypes
+} from '../../../../settings/quiz/constants';
+import models from '../../../../settings/quiz/models';
+import * as S from './styles';
 
 
 
-interface IPropsSupportVisualQuiz{
+interface IPropsSupportVisualQuiz {
   onChange?: (complement: ITypesComplement) => void,
   reset?: boolean,
 }
 
-export default function SupportVisualQuiz({ 
+export default function SupportVisualQuiz({
   onChange, reset }: IPropsSupportVisualQuiz) {
 
-    const { BLOCK_CODE, IMAGE } = complementTypes
-  const [support, setSupport] = useState(""); 
-    const [typesComplement, setTypesComplement] = useState<ITypesComplement>(
-      models.newTypesComplement()
-    )
+  const { BLOCK_CODE, IMAGE } = complementTypes
+  const [support, setSupport] = useState("");
+  const [typesComplement, setTypesComplement] = useState<ITypesComplement>(
+    models.newTypesComplement()
+  )
 
 
   useEffect(() => {
-    if(onChange){
+    if (onChange) {
       onChange(typesComplement);
     }
   }, [typesComplement]);
@@ -42,7 +40,7 @@ export default function SupportVisualQuiz({
     }
   }, [reset]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setTypesComplement(models.newTypesComplement())
   }, [support])
 
@@ -50,7 +48,7 @@ export default function SupportVisualQuiz({
     <S.SupportVisualQuiz>
       <Checkboxes
         reset={reset}
-        onChange={(option: string)=> setSupport(option)}
+        onChange={(option: string) => setSupport(option)}
         options={[
           {
             label: (
@@ -76,10 +74,12 @@ export default function SupportVisualQuiz({
         <div className="block-code">
           <CodeMirrorEditor
             reset={reset}
-            onChange={(code: string, langMode)=> {
-              setTypesComplement(prevTypes=> ({...prevTypes, blockCode: { 
-                langMode, value: code
-               }}))
+            onChange={(code: string, langMode) => {
+              setTypesComplement(prevTypes => ({
+                ...prevTypes, blockCode: {
+                  langMode, value: code
+                }
+              }))
             }}
             fieldSelectLang={true}
           />

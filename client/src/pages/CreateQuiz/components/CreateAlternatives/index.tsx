@@ -1,18 +1,16 @@
+/* eslint-disable max-len */
 import { useEffect, useState } from "react";
-import * as C from "./styles";
+
 
 import Checkboxes from "../../../../components/Checkboxes";
-
-import { alternativeTypes } from "../../../../settings/quiz/constants";
-
-import creatingQuizModels from "../../../../settings/quiz/models";
-import configsCreatingQuiz from "../../../../settings/quiz/configs";
-
-
-import TextareCreatedAlt from "./components/TextareCreatedAlt"
-import Alternative from "./components/Alternative";
-import { checkAmountCharsLines } from "../../../../utils/checkAmountCharsLines";
 import { IAlternative } from "../../../../interfaces/Quiz";
+import configsCreatingQuiz from "../../../../settings/quiz/configs";
+import { alternativeTypes } from "../../../../settings/quiz/constants";
+import creatingQuizModels from "../../../../settings/quiz/models";
+import { checkAmountCharsLines } from "../../../../utils/checkAmountCharsLines";
+import Alternative from "./components/Alternative";
+import TextareCreatedAlt from "./components/TextareCreatedAlt"
+import * as C from "./styles";
 
 
 
@@ -75,8 +73,8 @@ function FieldCreate({
       />
 
       {alternativeType !== null &&
-      listAlternatives.length + 1 <= (limitedAlternatives - 1) &&
-      alternativeType ? (
+        listAlternatives.length + 1 <= (limitedAlternatives - 1) &&
+        alternativeType ? (
         <div className="field-alt">
           {alternativeType === alternativeTypes.LINE_TEXT && (
             <C.TextareaCreatedAlt>
@@ -137,7 +135,7 @@ export default function CreateAlternativesQuiz({
   }, [reset]);
 
 
-  const selectedAlternativeCorrectly = (alternative: IAlternative)=> {
+  const selectedAlternativeCorrectly = (alternative: IAlternative) => {
     const cloneAlternativesCreated = createdAlterantives.slice();
     const clearCorrectsAlternatives = cloneAlternativesCreated.map((cloneAlt) =>
       cloneAlt.id === alternative.id
@@ -151,7 +149,7 @@ export default function CreateAlternativesQuiz({
     setCreatedAlternatives((prevAlts) => [...prevAlts, alternative]);
   };
 
-  const deleteAlternativeQuiz = (id: string)=> {
+  const deleteAlternativeQuiz = (id: string) => {
     setCreatedAlternatives((prevAlts) => {
       return prevAlts.filter((alt) => alt.id !== id);
     });
@@ -177,19 +175,18 @@ export default function CreateAlternativesQuiz({
         </span>
       )}
       <ul
-        className={`list-alternatives-created-quiz ${
-          checkAmountCharsLines(createdAlterantives)
-            ? "flex-full-alts"
-            : "grid-alts"
-        }`}
+        className={`list-alternatives-created-quiz ${checkAmountCharsLines(createdAlterantives)
+          ? "flex-full-alts"
+          : "grid-alts"
+          }`}
       >
         {
-          createdAlterantives?.map((alt, index, alts)=>(
-            <Alternative 
+          createdAlterantives?.map((alt, index, alts) => (
+            <Alternative
               key={alt.id}
-              alternative={alt} 
-              index={index} 
-              alternatives={alts} 
+              alternative={alt}
+              index={index}
+              alternatives={alts}
               onDelete={deleteAlternativeQuiz}
               onCorrectly={selectedAlternativeCorrectly}
             />

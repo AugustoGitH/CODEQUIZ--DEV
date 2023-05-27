@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-
 export default function generateID(length = 20): string {
   let result = ''
   const characters =

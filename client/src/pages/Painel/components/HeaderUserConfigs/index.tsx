@@ -1,32 +1,36 @@
 import { useEffect, useState } from "react"
+import { useQueryClient } from "react-query"
+
 import ProfilePictureSelection from "../../../../components/ProfilePictureSelection"
-import * as S from "./styles"
 import userSettings from "../../../../settings/user"
+import * as S from "./styles"
 
 
-interface IPropsHeaderUserConfigs{
+interface IPropsHeaderUserConfigs {
   imgProfile: string | undefined
 }
 
-const HeaderUserConfigs = ({ imgProfile }: IPropsHeaderUserConfigs)=>{
+const HeaderUserConfigs = ({ imgProfile }: IPropsHeaderUserConfigs) => {
   const [showSelectImage, setShowSelectImage] = useState(false)
   const [imageProfile, setImageProfile] = useState(userSettings.profileDefault)
+  const queryClient = useQueryClient()
 
-  useEffect(()=>{
-    if(imgProfile){
+  useEffect(() => {
+    if (imgProfile) {
       setImageProfile(imgProfile)
     }
   }, [imgProfile])
 
   return (
     <S.HeaderUserConfigs>
-      <ProfilePictureSelection 
+      <ProfilePictureSelection
         show={showSelectImage}
-        onClose={()=> setShowSelectImage(false)}
-        onReplaceProfile={(img)=> setImageProfile(img)}
+        onClose={() => setShowSelectImage(false)}
+        onReplaceProfile={(img) => setImageProfile(img)}
+        onSuccess={() => queryClient.invalidateQueries("quizzes-public")}
       />
-      <div className="image-profile-user" onClick={()=> setShowSelectImage(true)}>
-        <img src={imageProfile} alt="image-user"/>
+      <div className="image-profile-user" onClick={() => setShowSelectImage(true)}>
+        <img src={imageProfile} alt="image-user" />
       </div>
       <div className="nav-buttons">
         <button className="button-trophy"><i className='bx bxs-trophy'></i></button>

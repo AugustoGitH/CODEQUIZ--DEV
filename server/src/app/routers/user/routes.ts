@@ -1,42 +1,44 @@
-import controllersQuiz from "../../controllers/user/Quiz"
-import controllersUser from "../../controllers/user/User"
-
-import { TRoute } from "../public/types"
-
-
+import controllersQuiz from '../../controllers/user/Quiz'
+import controllersUser from '../../controllers/user/User'
+import { TRoute } from '../public/types'
 
 export const routersUserQuiz = [
   {
-    path: "/creating-quiz",
+    path: '/creating-quiz',
     controller: controllersQuiz.creatingQuiz,
-    method: "post"
+    method: 'post',
   },
   {
-    path: "/get-quizzes-by-created-user",
+    path: '/get-quizzes-by-created-user',
     controller: controllersQuiz.getQuizzes,
-    method: "get"
+    method: 'get',
   },
   {
-    path: "/get-quiz-by-created-user/:id",
+    path: '/get-quiz-by-created-user/:id',
     controller: controllersQuiz.getQuiz,
-    method: "get"
+    method: 'get',
+  },
+  {
+    controller: controllersQuiz.deleteQuiz,
+    method: 'delete',
+    path: '/delete-quiz/:id',
   },
 ] as TRoute[]
 
 export const routersUserProfile = [
   {
-    path: "/get-profile-picture-options",
+    path: '/get-profile-picture-options',
     controller: controllersUser.getProfilePictureOptions,
-    method: "get"
+    method: 'get',
   },
   {
-    path: "/change-profile-picture",
+    path: '/change-profile-picture',
     controller: controllersUser.changeProfilePicture,
-    method: "post"
+    method: 'post',
   },
   {
-    path: "/get-infos-user",
+    path: '/get-infos-user',
     controller: controllersUser.getInfosUser,
-    method: "get"
-  }
+    method: 'get',
+  },
 ] as TRoute[]

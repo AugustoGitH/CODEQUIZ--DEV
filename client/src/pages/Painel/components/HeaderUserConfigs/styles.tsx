@@ -32,7 +32,7 @@ export const HeaderUserConfigs = styled.div`
         border-radius: .3rem;
         z-index: 1;
         bottom: -1.8rem;
-        right: -50%;
+        right: -55%;
         text-transform: uppercase;
         transform: translateY(-17px);
         opacity: 0;
@@ -95,6 +95,7 @@ export const HeaderUserConfigs = styled.div`
         transform: translateY(-17px);
         opacity: 0;
         transition: .2s;
+        right: -55%;
         
       }
       &:hover{

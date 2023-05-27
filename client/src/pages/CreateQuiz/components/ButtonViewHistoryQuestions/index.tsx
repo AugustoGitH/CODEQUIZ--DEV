@@ -1,26 +1,23 @@
-import React, {useEffect, useRef, useState } from 'react';
-
-import { useCreatingQuiz } from "../../../../stores/creatingQuiz"
+import React, { useEffect, useRef, useState } from 'react';
 
 import AceEditor from '../../../../components/AceEditor';
-
-
+import { IAlternative, IQuestion, ITechnology } from '../../../../interfaces/Quiz';
+import { useCreatingQuiz } from "../../../../stores/creatingQuiz"
+import { checkAmountCharsLines } from '../../../../utils/checkAmountCharsLines';
 import * as V from './styles';
 
-import { checkAmountCharsLines } from '../../../../utils/checkAmountCharsLines';
-import { IAlternative, IQuestion, ITechnology } from '../../../../interfaces/Quiz';
 
 
-interface IPropQuestion{
-    question: IQuestion,
-    onDelete: (id:string)=> void,
-    index: number,
-    modeEditor: ITechnology
+interface IPropQuestion {
+  question: IQuestion,
+  onDelete: (id: string) => void,
+  index: number,
+  modeEditor: ITechnology
 }
 
 function Question({ question, onDelete, index }: IPropQuestion) {
-  
-  const Alternative = ({ alternative }: { alternative: IAlternative}) => {
+
+  const Alternative = ({ alternative }: { alternative: IAlternative }) => {
     return (
       <li className={alternative.correct ? 'alt-correct' : ''}>
         <span className="letter-alt">{alternative.letter}</span>
@@ -41,20 +38,19 @@ function Question({ question, onDelete, index }: IPropQuestion) {
       <p>{`${index + 1}: ${question.question}`}</p>
       {question.typesComplement.blockCode.value && (
         <div className="block-editor">
-          <AceEditor 
-            disabled 
-            preValue={question.typesComplement.blockCode.value} 
-            mode={question.typesComplement.blockCode.langMode || 'javascript'} 
+          <AceEditor
+            disabled
+            preValue={question.typesComplement.blockCode.value}
+            mode={question.typesComplement.blockCode.langMode || 'javascript'}
             fontSize='small'
           />
         </div>
       )}
       <ul
-        className={`alternatives ${
-          checkAmountCharsLines(question.alternatives)
+        className={`alternatives ${checkAmountCharsLines(question.alternatives)
             ? 'flex-full-alts'
             : 'grid-alts'
-        }`}
+          }`}
       >
         {question.alternatives.map((alternative, index) => (
           <Alternative alternative={alternative} key={index} />

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/theme-dracula";
 import "ace-builds/src-noconflict/ext-language_tools";
@@ -9,8 +9,8 @@ import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-html";
 
-import { AceEditorStyled } from "./styles";
 import { ITechnology } from "../../interfaces/Quiz";
+import { AceEditorStyled } from "./styles";
 
 interface IPropsCodeEditor {
   maxLines?: number;
@@ -120,7 +120,7 @@ export default function CodeEditor({
             highlightGutterLine: true,
             useWorker: false,
             showFoldWidgets: false,
-            
+
           }}
         />
       </div>

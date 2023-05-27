@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+
 import AlertSheetStyled from './styles';
 
-interface IPropsAlertSheet{
-    show: boolean,
-    helperText: string | React.ReactNode,
-    timeClose?: number,
-    finallyLoading?: ()=> void
+interface IPropsAlertSheet {
+  show: boolean,
+  helperText: string | React.ReactNode,
+  timeClose?: number,
+  finallyLoading?: () => void
 }
 
 export default function AlertSheet({
@@ -17,7 +18,7 @@ export default function AlertSheet({
   const [percentProgress, setPercentProgress] = useState(100);
   const [isShow, setIsShow] = useState(false);
 
-  const popUpRef = useRef<HTMLDivElement  | null>(null);
+  const popUpRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     setIsShow(show);
     if (show) {
@@ -30,8 +31,8 @@ export default function AlertSheet({
             setTimeout(() => {
               popUpRef.current?.classList.add('translate-rigth-0');
               setTimeout(() => {
-                if(finallyLoading){
-                    finallyLoading()
+                if (finallyLoading) {
+                  finallyLoading()
                 }
                 setPercentProgress(100);
               }, 300);

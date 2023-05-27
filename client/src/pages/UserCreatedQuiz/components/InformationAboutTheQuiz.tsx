@@ -8,12 +8,12 @@ interface PropsInformationAboutTheQuiz {
   questionTime: number
 }
 
-const InformationAboutTheQuiz = ({ 
-  technology, 
-  difficulty, 
-  creationDate, 
-  questionTime 
-}: PropsInformationAboutTheQuiz)=>{
+const InformationAboutTheQuiz = ({
+  technology,
+  difficulty,
+  creationDate,
+  questionTime
+}: PropsInformationAboutTheQuiz) => {
   return (
     <S.InformationAboutTheQuiz>
       <h2>{">"} Informações básicas do seu desafio</h2>

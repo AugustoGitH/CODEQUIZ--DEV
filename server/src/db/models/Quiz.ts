@@ -1,4 +1,5 @@
 import { model, Schema, Document } from 'mongoose'
+
 import { IQuizModel } from '../interfaces/IQuizModel'
 
 const quizSchema = new Schema(
@@ -9,7 +10,7 @@ const quizSchema = new Schema(
     creatorId: { type: String, required: true },
     questionTime: { type: Number, required: true },
     completedMatches: { type: Number, default: 0 },
-    matchHistory: { type: Array, default: [] }
+    matchHistory: { type: Array, default: [] },
   },
   { timestamps: true }
 )

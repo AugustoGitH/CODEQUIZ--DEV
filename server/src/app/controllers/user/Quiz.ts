@@ -2,16 +2,12 @@
 import { type Request, type Response } from 'express'
 import jwt from 'jsonwebtoken'
 
+import Quiz from '../../../db/models/Quiz'
+import { schemaQuiz } from '../../../db/schemas/Quiz'
 import { ITokenPayload } from '../../../interfaces/IJWTUser'
 import { IQuizSentByCustomer } from '../../../interfaces/IQuiz'
-
-import Quiz from '../../../db/models/Quiz'
-
-import { schemaQuiz } from '../../../db/schemas/Quiz'
-
-import { refactoringQuizUser } from '../../../utils/quiz/refactoringQuizes'
-
 import quizCreatingSettings from '../../../settings/quizCreating'
+import { refactoringQuizUser } from '../../../utils/quiz/refactoringQuizes'
 
 interface IResponseCreatorId {
   message: string
@@ -96,6 +92,25 @@ export default {
       })
     }
   },
+
+  async deleteQuiz(req: Request, res: Response) {
+    const { id: idQuiz } = req.params
+
+    try {
+      await Quiz.deleteOne({ _id: idQuiz })
+      res.status(200).send({
+        message: 'O seu quiz foi deletado com sucesso!',
+      })
+    } catch (error) {
+      console.log(error)
+      res.status(500).send({
+        message:
+          'Ocorreu um erro ao deletar o seu projeto! Procure o desenvolvedor e reporte o erro.',
+      })
+    }
+    console.log(idQuiz)
+  },
+
   async getQuizzes(req: Request, res: Response) {
     try {
       const token = req.cookies[process.env.NAME_TOKEN_AUTORIZATION || '']
@@ -116,33 +131,34 @@ export default {
       })
       res.status(200).send({
         message: 'Quizes resgatados com sucesso!',
-        data: { quizzes: refactoringQuizUser.map(quizzes, "sample") },
+        data: { quizzes: refactoringQuizUser.map(quizzes, 'sample') },
       })
     } catch (error) {
-      console.log(`Ocorreu um erro ao criar o quiz. error: ${error}`)
+      console.log(`Ocorreu um erro ao restagar os quizzes. error: ${error}`)
       res.status(500).send({
         message: `Ocorreu um erro interno no servidor ao resgatar seus quizes! 
         Entre em contato com o desenvolvedor e reporte o erro.`,
       })
     }
   },
-  async getQuiz(req: Request, res: Response){
+  async getQuiz(req: Request, res: Response) {
     const { id: idQuiz } = req.params
-    try{
-      const quiz = await Quiz.findById({_id: idQuiz})
-      if(!quiz) return res.status(404).send({
-        message: "Quiz não encontrado!"
-      })
+    try {
+      const quiz = await Quiz.findById({ _id: idQuiz })
+      if (!quiz)
+        return res.status(404).send({
+          message: 'Quiz não encontrado!',
+        })
       res.status(200).send({
-        message: "Quiz resgatado com sucesso!",
-        data: { quiz: refactoringQuizUser.find(quiz, "focus") }
+        message: 'Quiz resgatado com sucesso!',
+        data: { quiz: refactoringQuizUser.find(quiz, 'focus') },
       })
-
-    }catch(error){
+    } catch (error) {
       console.log(error)
       res.status(404).send({
-        message: "Ocorreu um erro interno no servidor, contate o desenvolvedor!"
+        message:
+          'Ocorreu um erro interno no servidor, contate o desenvolvedor!',
       })
     }
-  }
+  },
 }

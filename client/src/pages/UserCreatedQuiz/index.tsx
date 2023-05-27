@@ -1,17 +1,22 @@
+
 import { useParams } from "react-router-dom"
-import * as S from "./styles"
-import Header from "../../components/Header"
-import Container from "../../components/Container"
-import useFetchUserCreatedQuiz from "../../queries/quiz/user/quiz"
-import InformationAboutTheQuiz from "./components/InformationAboutTheQuiz"
-import PageLoaded from "../../components/PageLoaded"
+
 import moment from "moment"
+
+import Container from "../../components/Container"
+import Header from "../../components/Header"
+import PageLoaded from "../../components/PageLoaded"
+import useFetchUserCreatedQuiz from "../../queries/quiz/user/quiz"
+import ControllersEditQuiz from "./components/ControllersEditQuiz"
+import InformationAboutTheQuiz from "./components/InformationAboutTheQuiz"
+import * as S from "./styles"
+
 
 const UserCreatedQuiz = () => {
   const { id: idQuiz } = useParams()
   const { data: quiz, isFetching } = useFetchUserCreatedQuiz(idQuiz || "")
 
-  if(isFetching && !quiz) return ( <PageLoaded/> )
+  if (isFetching && !quiz) return (<PageLoaded />)
   return (
     <>
       <Header painel={{ playQuizzes: true, back: true }} />
@@ -40,12 +45,15 @@ const UserCreatedQuiz = () => {
 
           {
             quiz && (
-              <InformationAboutTheQuiz 
-                creationDate={moment(new Date(quiz.createdAt)).format("DD/MM/YYYY")}
-                difficulty={quiz.difficulty}
-                technology={quiz.technology}
-                questionTime={quiz.questionTime}
-              />
+              <>
+                <InformationAboutTheQuiz
+                  creationDate={moment(new Date(quiz.createdAt)).format("DD/MM/YYYY")}
+                  difficulty={quiz.difficulty}
+                  technology={quiz.technology}
+                  questionTime={quiz.questionTime}
+                />
+                <ControllersEditQuiz quizId={quiz.id} />
+              </>
             )
           }
         </S.UserCreatedQuiz>

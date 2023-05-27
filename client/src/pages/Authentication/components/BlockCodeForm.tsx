@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
+
 import { BlockCodeFormStyled } from '../styles';
 
-interface IValueForm{
+interface IValueForm {
   [key: string]: string,
   apelido: string,
   email: string,
   senha: string
 }
 
-interface IPropsBlockCodeForm{
-  onChange: (verify: boolean)=> void,
+interface IPropsBlockCodeForm {
+  onChange: (verify: boolean) => void,
   helperText?: string | undefined
 }
 
@@ -24,7 +25,7 @@ export default function BlockCodeForm({
     senha: '',
   });
 
-  const handleChangeConditions = (valueFormulary: IValueForm):boolean => {
+  const handleChangeConditions = (valueFormulary: IValueForm): boolean => {
     const conditions = {
       apelido: 'apelido()',
       email: 'email()',

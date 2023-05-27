@@ -1,21 +1,17 @@
 import { useState, useRef } from "react";
 
+import AlertSheet from "../../components/AlertSheet";
+import Checkboxes from "../../components/Checkboxes";
 import Container from "../../components/Container";
 import Header from "../../components/Header";
-import TextArea from "../../components/Textarea";
-import Checkboxes from "../../components/Checkboxes";
-import SupportVisualQuiz from "./components/SupportVisualQuestion";
-import CreateAlternativesQuiz from "./components/CreateAlternatives";
 import PopUpLoading from "../../components/PopUpLoading";
-import AlertSheet from "../../components/AlertSheet";
-
-import { useCreatingQuiz } from "../../stores/creatingQuiz"
-
+import TextArea from "../../components/Textarea";
 import configs from "../../settings/quiz/configs";
-
-
-import * as C from "./styles";
+import { useCreatingQuiz } from "../../stores/creatingQuiz"
 import ButtonViewHistoryQuestions from "./components/ButtonViewHistoryQuestions";
+import CreateAlternativesQuiz from "./components/CreateAlternatives";
+import SupportVisualQuiz from "./components/SupportVisualQuestion";
+import * as C from "./styles";
 
 
 export default function CreateQuiz() {
@@ -25,37 +21,37 @@ export default function CreateQuiz() {
     showPopUp: false,
     loading: false,
   });
-  const [ isCreatingQuestion, setIsCreatingQuestion ] = useState(false);
+  const [isCreatingQuestion, setIsCreatingQuestion] = useState(false);
 
-  const { 
+  const {
     addQuestion, addQuestionAttributes, addQuizAttributes,
     isResetQuestion, submitQuiz, quizProducted, questionsProducted
   } = useCreatingQuiz()
 
   const endPointRef = useRef<HTMLDivElement | null>(null);
 
-  const handleAddQuestion = ()=>{
-    addQuestion(()=>{
+  const handleAddQuestion = () => {
+    addQuestion(() => {
       setIsCreatingQuestion(true)
       navigateEndPoint()
     })
   }
 
-  const handleSubmitQuiz = ()=>{
+  const handleSubmitQuiz = () => {
     submitQuiz({
-      whenSend: ()=>{
+      whenSend: () => {
         setCreatingQuizStatus({
           showPopUp: true,
           loading: true,
         });
       },
-      whenFinishSend: ()=>{
+      whenFinishSend: () => {
         setCreatingQuizStatus((prevCreating) => ({
           ...prevCreating,
           loading: false,
         }));
       },
-      whenHaveError: message=>{
+      whenHaveError: message => {
         setCreatingQuizStatus({ loading: false, showPopUp: false });
         setTimeout(() => alert(message), 1000);
       },
@@ -91,7 +87,7 @@ export default function CreateQuiz() {
         finallyLoading={() => setIsCreatingQuestion(false)}
       />
       <Header painel={{ back: true }}>
-        <ButtonViewHistoryQuestions/>
+        <ButtonViewHistoryQuestions />
       </Header>
       <Container>
         <C.CreateQuiz>
@@ -107,7 +103,7 @@ export default function CreateQuiz() {
               perguntas. Escolha uma área em que você tenha conhecimento e
               considere o público-alvo do quiz. Verifique se tem todos os
               recursos necessários para criar as perguntas e respostas.
-              <br/><span>{"-->"} Escolha obrigatória</span>
+              <br /><span>{"-->"} Escolha obrigatória</span>
             </p>
             <Checkboxes
               preValue={quizProducted.technology}
@@ -123,7 +119,7 @@ export default function CreateQuiz() {
               os jogadores saibam o que esperar e possam se preparar
               adequadamente para enfrentar o desafio, evitando ficar tão
               perdidos quanto em um programa mal escrito.
-              <br/><span>{"-->"} Escolha obrigatória</span>
+              <br /><span>{"-->"} Escolha obrigatória</span>
             </p>
             <Checkboxes
               preValue={quizProducted.difficulty}
@@ -135,11 +131,11 @@ export default function CreateQuiz() {
           <div className="box-create-quiz">
             <span className="subject-box">Tempo</span>
             <p className="description-child">
-            É importante que você defina um tempo limite para a resolução das 
-            questões em seu quiz, levando em consideração que dependendo de sua
-            dificuldade as questões podem requerer mais tempo do que outras para 
-            serem resolvidas com precisão.
-            <br/><span>{"-->"} Escolha obrigatória</span>
+              É importante que você defina um tempo limite para a resolução das
+              questões em seu quiz, levando em consideração que dependendo de sua
+              dificuldade as questões podem requerer mais tempo do que outras para
+              serem resolvidas com precisão.
+              <br /><span>{"-->"} Escolha obrigatória</span>
             </p>
             <Checkboxes
               preValue={quizProducted?.questionTime?.toString() || ""}
@@ -164,7 +160,7 @@ export default function CreateQuiz() {
               do layout e incluirá a própria pergunta, juntamente com
               informações adicionais, como uma descrição ou observação
               complementar para auxiliar o jogador na resolução do desafio.{" "}
-              <br/><span>{"-->"} Preenchimento obrigatório</span>
+              <br /><span>{"-->"} Preenchimento obrigatório</span>
             </p>
             <TextArea
               label="Questão"
@@ -198,7 +194,7 @@ export default function CreateQuiz() {
               por uma linha de código ou texto. Geralmente, é recomendável
               fornecer pelo menos duas opções de resposta. No editor do quiz,
               você pode adicionar até <b>4 opções de resposta</b>.
-              <br/><span>{"-->"} Escolha obrigatória</span>
+              <br /><span>{"-->"} Escolha obrigatória</span>
             </p>
             <CreateAlternativesQuiz
               onChange={(val) => addQuestionAttributes(val, "alternatives")}
@@ -208,11 +204,11 @@ export default function CreateQuiz() {
 
           <nav id="nav-buttons-finally">
             {questionsProducted.length < limitedQuestions - 1 ? (
-              <button onClick={ handleAddQuestion } id="button-add-quests">
+              <button onClick={handleAddQuestion} id="button-add-quests">
                 Adicionar mais uma questão
               </button>
             ) : questionsProducted.length === limitedQuestions - 1 ? (
-              <button onClick={ handleSubmitQuiz} id="button-created-quiz">
+              <button onClick={handleSubmitQuiz} id="button-created-quiz">
                 Criar quiz
               </button>
             ) : (

@@ -8,8 +8,6 @@ interface IResponseAuthentication {
   status: boolean
 }
 
-
-
 const authentication = {
   async register(user: IRegister): Promise<IResponseAuthentication> {
     try {

@@ -21,10 +21,10 @@ export default function Footer() {
         </nav>
         <p className="rigths-reserveds">
           ©{' '}
-          <a target="_blank" href="https://meuportfolio.up.railway.app">
+          <a target="_blank" href="https://augustowestphal.up.railway.app">
             Augusto Caetano Westphal
           </a>
-          , 2023. <br/>All Rights Reserved
+          , 2023. <br />All Rights Reserved
         </p>
       </div>
     </F.Footer>

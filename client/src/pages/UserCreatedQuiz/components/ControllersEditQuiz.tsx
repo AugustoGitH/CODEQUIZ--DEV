@@ -20,7 +20,8 @@ const ControllersEditQuiz = ({ quizId }: PropsControllersEditQuiz) => {
     deleteQuizService(quizId).then(({ message, status }) => {
       setShowPopUpDeleteQuiz(false)
       if (status) {
-        queryClient.invalidateQueries(["quizzes-public", "quizzes-by-created"])
+        queryClient.invalidateQueries("quizzes-by-created")
+        queryClient.invalidateQueries("quizzes-public")
         navigate("/painel")
       } else {
         alert(message)

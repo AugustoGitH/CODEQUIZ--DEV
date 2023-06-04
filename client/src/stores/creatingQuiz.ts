@@ -144,7 +144,6 @@ export const useCreatingQuiz = () => {
         resetPreviousQuestion()
         resetQuiz()
         queryClient.invalidateQueries(['quizzes-by-created'])
-
         whenFinishSend()
       } else {
         whenHaveError(message)

@@ -12,14 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-/* eslint-disable max-len */
 const Quiz_1 = __importDefault(require("../../../db/models/Quiz"));
-const refactoringQuizes_1 = require("../../../utils/quiz/refactoringQuizes");
-const quizCreating_1 = __importDefault(require("../../../settings/quizCreating"));
-const checkQuestionsCorrectly_1 = __importDefault(require("../../../utils/quiz/checkQuestionsCorrectly"));
-const recordMatchData_1 = __importDefault(require("../../../db/utils/quiz/recordMatchData"));
 const User_1 = __importDefault(require("../../../db/models/User"));
+const recordMatchData_1 = __importDefault(require("../../../db/utils/quiz/recordMatchData"));
+const quizCreating_1 = __importDefault(require("../../../settings/quizCreating"));
 const checkAndSaveUserGame_1 = __importDefault(require("../../../utils/quiz/checkAndSaveUserGame"));
+const checkQuestionsCorrectly_1 = __importDefault(require("../../../utils/quiz/checkQuestionsCorrectly"));
+const refactoringQuizes_1 = require("../../../utils/quiz/refactoringQuizes");
 exports.default = {
     getQuizzesPublic(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -28,11 +27,11 @@ exports.default = {
                 const usersCreator = yield Promise.all(quizzes.map((quiz) => __awaiter(this, void 0, void 0, function* () {
                     return yield User_1.default.findById(quiz.creatorId);
                 })));
-                const quizzesWitchCreator = quizzes.map(quiz => {
-                    const creatorInfos = usersCreator.find(user => (user === null || user === void 0 ? void 0 : user._id.toString()) === quiz.creatorId);
+                const quizzesWitchCreator = quizzes.map((quiz) => {
+                    const creatorInfos = usersCreator.find((user) => (user === null || user === void 0 ? void 0 : user._id.toString()) === quiz.creatorId);
                     return Object.assign(Object.assign({}, refactoringQuizes_1.refactoringQuizPublic.propsForSample(quiz)), { creator: {
                             name: (creatorInfos === null || creatorInfos === void 0 ? void 0 : creatorInfos.name) || null,
-                            profileImg: (creatorInfos === null || creatorInfos === void 0 ? void 0 : creatorInfos.profilePicture) || null
+                            profileImg: (creatorInfos === null || creatorInfos === void 0 ? void 0 : creatorInfos.profilePicture) || null,
                         } });
                 });
                 res.send({
@@ -70,8 +69,8 @@ exports.default = {
                     answersCorrectly: answersQuestionsServer,
                 };
                 const currentMatch = yield (0, recordMatchData_1.default)({
-                    authToken: req.cookies[((_a = process.env) === null || _a === void 0 ? void 0 : _a.NAME_TOKEN_AUTORIZATION) || ""] || "",
-                    resolvedPlayerAnswer: Object.assign(Object.assign({}, answersServer), { timeAverage })
+                    authToken: req.cookies[((_a = process.env) === null || _a === void 0 ? void 0 : _a.NAME_TOKEN_AUTORIZATION) || ''] || '',
+                    resolvedPlayerAnswer: Object.assign(Object.assign({}, answersServer), { timeAverage }),
                 });
                 const achievement = yield (0, checkAndSaveUserGame_1.default)({ currentMatch, quiz });
                 res.status(200).send({
@@ -94,19 +93,19 @@ exports.default = {
                 const quiz = yield Quiz_1.default.findById({ _id: idQuiz });
                 if (!quiz)
                     return res.status(404).send({
-                        message: "Quiz não encontrado!"
+                        message: 'Quiz não encontrado!',
                     });
                 res.status(200).send({
-                    message: "Quiz resgatado com sucesso!",
-                    data: { quiz: refactoringQuizes_1.refactoringQuizPublic.find(quiz, "focus") }
+                    message: 'Quiz resgatado com sucesso!',
+                    data: { quiz: refactoringQuizes_1.refactoringQuizPublic.find(quiz, 'focus') },
                 });
             }
             catch (error) {
                 console.log(error);
                 res.status(404).send({
-                    message: "Ocorreu um erro interno no servidor, contate o desenvolvedor!"
+                    message: 'Ocorreu um erro interno no servidor, contate o desenvolvedor!',
                 });
             }
         });
-    }
+    },
 };

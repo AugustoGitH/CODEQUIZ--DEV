@@ -15,8 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const Quiz_1 = __importDefault(require("../../../db/models/Quiz"));
 const Quiz_2 = require("../../../db/schemas/Quiz");
-const refactoringQuizes_1 = require("../../../utils/quiz/refactoringQuizes");
 const quizCreating_1 = __importDefault(require("../../../settings/quizCreating"));
+const refactoringQuizes_1 = require("../../../utils/quiz/refactoringQuizes");
 function returnCreatorId(token) {
     try {
         const { idUser } = jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET || '');
@@ -81,6 +81,24 @@ exports.default = {
             }
         });
     },
+    deleteQuiz(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id: idQuiz } = req.params;
+            try {
+                yield Quiz_1.default.deleteOne({ _id: idQuiz });
+                res.status(200).send({
+                    message: 'O seu quiz foi deletado com sucesso!',
+                });
+            }
+            catch (error) {
+                console.log(error);
+                res.status(500).send({
+                    message: 'Ocorreu um erro ao deletar o seu projeto! Procure o desenvolvedor e reporte o erro.',
+                });
+            }
+            console.log(idQuiz);
+        });
+    },
     getQuizzes(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -99,11 +117,11 @@ exports.default = {
                 });
                 res.status(200).send({
                     message: 'Quizes resgatados com sucesso!',
-                    data: { quizzes: refactoringQuizes_1.refactoringQuizUser.map(quizzes, "sample") },
+                    data: { quizzes: refactoringQuizes_1.refactoringQuizUser.map(quizzes, 'sample') },
                 });
             }
             catch (error) {
-                console.log(`Ocorreu um erro ao criar o quiz. error: ${error}`);
+                console.log(`Ocorreu um erro ao restagar os quizzes. error: ${error}`);
                 res.status(500).send({
                     message: `Ocorreu um erro interno no servidor ao resgatar seus quizes! 
         Entre em contato com o desenvolvedor e reporte o erro.`,
@@ -118,19 +136,19 @@ exports.default = {
                 const quiz = yield Quiz_1.default.findById({ _id: idQuiz });
                 if (!quiz)
                     return res.status(404).send({
-                        message: "Quiz não encontrado!"
+                        message: 'Quiz não encontrado!',
                     });
                 res.status(200).send({
-                    message: "Quiz resgatado com sucesso!",
-                    data: { quiz: refactoringQuizes_1.refactoringQuizUser.find(quiz, "focus") }
+                    message: 'Quiz resgatado com sucesso!',
+                    data: { quiz: refactoringQuizes_1.refactoringQuizUser.find(quiz, 'focus') },
                 });
             }
             catch (error) {
                 console.log(error);
                 res.status(404).send({
-                    message: "Ocorreu um erro interno no servidor, contate o desenvolvedor!"
+                    message: 'Ocorreu um erro interno no servidor, contate o desenvolvedor!',
                 });
             }
         });
-    }
+    },
 };

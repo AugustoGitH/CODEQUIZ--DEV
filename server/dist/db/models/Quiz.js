@@ -8,6 +8,6 @@ const quizSchema = new mongoose_1.Schema({
     creatorId: { type: String, required: true },
     questionTime: { type: Number, required: true },
     completedMatches: { type: Number, default: 0 },
-    matchHistory: { type: Array, default: [] }
+    matchHistory: { type: Array, default: [] },
 }, { timestamps: true });
 exports.default = (0, mongoose_1.model)('Quiz', quizSchema);

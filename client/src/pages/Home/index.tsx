@@ -22,7 +22,7 @@ const Home = () => {
                         <i className='bx bxl-typescript icon-type' ></i>
                     </div>
                     <img className="gif-scroll" src="https://cdn.dribbble.com/users/1459765/screenshots/3563580/scrolling_mousewheel.gif" />
-                    <img className="logo" src={imageLogo} />
+                    <img className="logo" src="https://64.media.tumblr.com/a3f76b4f3ac0632ee6da4f9b36caa1f4/fd918c7bea7b4c78-15/s540x810/c7dd3941a68f619ba6a4caea363a52464d15358d.gif" />
                     <h1>Seja muito bem-vindo!</h1>
                     <h2>
                         O <b>Codequiz</b> é uma plataforma que permite <b>criar e jogar quizzes </b>
@@ -38,12 +38,6 @@ const Home = () => {
                             Desejo criar uma conta
                         </Button>
                     </nav>
-                    {/* <p>
-                        O Codequiz é uma plataforma que permite criar e jogar quizzes sobre tecnologias enquanto se diverte 
-                        e aprende. O conteúdo é sempre atualizado para manter os usuários informados sobre as últimas 
-                        novidades da programação. Comece a explorar o mundo do Codequiz agora mesmo e aproveite 
-                        essa oportunidade.
-                    </p> */}
                 </H.Apresentation>
                 <H.StartGame>
                     <div className="title">

@@ -8,35 +8,40 @@ const Quiz_1 = __importDefault(require("../../controllers/user/Quiz"));
 const User_1 = __importDefault(require("../../controllers/user/User"));
 exports.routersUserQuiz = [
     {
-        path: "/creating-quiz",
+        path: '/creating-quiz',
         controller: Quiz_1.default.creatingQuiz,
-        method: "post"
+        method: 'post',
     },
     {
-        path: "/get-quizzes-by-created-user",
+        path: '/get-quizzes-by-created-user',
         controller: Quiz_1.default.getQuizzes,
-        method: "get"
+        method: 'get',
     },
     {
-        path: "/get-quiz-by-created-user/:id",
+        path: '/get-quiz-by-created-user/:id',
         controller: Quiz_1.default.getQuiz,
-        method: "get"
+        method: 'get',
+    },
+    {
+        controller: Quiz_1.default.deleteQuiz,
+        method: 'delete',
+        path: '/delete-quiz/:id',
     },
 ];
 exports.routersUserProfile = [
     {
-        path: "/get-profile-picture-options",
+        path: '/get-profile-picture-options',
         controller: User_1.default.getProfilePictureOptions,
-        method: "get"
+        method: 'get',
     },
     {
-        path: "/change-profile-picture",
+        path: '/change-profile-picture',
         controller: User_1.default.changeProfilePicture,
-        method: "post"
+        method: 'post',
     },
     {
-        path: "/get-infos-user",
+        path: '/get-infos-user',
         controller: User_1.default.getInfosUser,
-        method: "get"
-    }
+        method: 'get',
+    },
 ];

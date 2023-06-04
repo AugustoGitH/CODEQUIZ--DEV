@@ -6,21 +6,27 @@ const Apresentation = styled.section`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: calc(70px + 2rem) 0;
+  padding: calc(70px) 0;
   text-align: center;
   position: relative;
-  @media (max-width: 1400px) {
+  @media (max-width: 1600px) {
     min-height: 100vh;
+  }
+  @media (min-width: 1600px) {
+    padding: calc(70px + 3rem) 0;
   }
   .gif-scroll{
     position: absolute;
     width: 100px;
     right: 0;
     bottom: .5rem;
+    @media (min-width: 1600px) {
+      display: none;
+    }
   }
   .logo{
     margin-bottom: 1rem;
-    width: 140px;
+    width: 200px;
   }
   .techs-flooter{
     & i{
@@ -95,7 +101,7 @@ const Apresentation = styled.section`
 
 const StartGame = styled.section`
   width: 100%;
-  padding: 4rem 0;
+  padding: calc(70px + 3rem) 0;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -131,4 +131,80 @@ Essas informações iniciais ajudam os usuários a ter uma visão geral dos quiz
 
 Lembre-se de implementar a funcionalidade de filtragem composta de acordo com os critérios definidos e exibir corretamente as informações iniciais do projeto, garantindo que estejam atualizadas e refletindo corretamente os dados do quiz.
 
+<img src="https://i.imgur.com/VhcUMiS.png"/>
 
+## Tela Inicial do Desafio
+
+A tela inicial do desafio no CodeQuiz é a primeira página apresentada aos usuários antes de começarem a resolver os desafios. Essa tela fornece uma introdução ao desafio, apresentando informações importantes sobre a dificuldade, tempo e linguagem.
+
+### Introdução ao Desafio
+
+Antes de iniciar o desafio, os usuários são informados sobre os seguintes detalhes:
+
+- Dificuldade: É apresentada uma descrição da dificuldade do desafio, como iniciante, intermediário, avançado ou nível assembly. Essa informação ajuda os usuários a terem uma noção do grau de complexidade do desafio.
+
+- Tempo: É exibido o tempo máximo disponível para a resolução do desafio. Os usuários são incentivados a concluí-lo dentro desse limite de tempo para testar suas habilidades de programação.
+
+- Linguagem: É informada a linguagem de programação utilizada no desafio, como JavaScript, CSS ou HTML. Essa informação ajuda os usuários a se prepararem para escrever código na linguagem apropriada.
+
+<img src="https://i.imgur.com/u0a5x9S.png"/>
+
+## Página de Resolução das Questões
+
+A página de resolução das questões no CodeQuiz é o local onde os usuários podem mostrar suas habilidades de programação ao responder às perguntas propostas. Essa página apresenta uma interface intuitiva e interativa, permitindo que os usuários concentrem-se na resolução das questões.
+
+### Cronômetro
+
+No topo da página, um cronômetro é exibido para indicar o tempo restante para concluir o desafio. Os usuários devem resolver as questões dentro do limite de tempo definido para testar sua agilidade e habilidades de programação.
+
+### Questão
+
+A questão é apresentada de forma clara e concisa, permitindo que os usuários compreendam o problema que devem resolver. Eles devem analisar cuidadosamente a questão para encontrar a resposta correta.
+
+### Complemento da Questão (se disponível)
+
+Caso haja um complemento à questão, ele será exibido após a questão principal. O complemento pode incluir um bloco de código relacionado ao problema, fornecendo informações adicionais ou instruções sobre como prosseguir.
+
+### Alternativas
+
+As alternativas são apresentadas para que os usuários possam escolher a resposta que consideram correta. Cada alternativa é exibida de maneira clara e objetiva, permitindo que os usuários tomem uma decisão informada.
+
+<img src="https://i.imgur.com/L8uUYJn.png"/>
+
+## Tela Final
+
+A tela final no CodeQuiz é exibida aos usuários após concluírem o desafio, apresentando informações e opções importantes sobre o desempenho deles na resolução das questões.
+
+### Média de Tempo de Resolução
+
+Na tela final, é exibida a média de tempo de resolução das questões durante o desafio. Essa métrica fornece aos usuários uma visão geral de quão eficientes foram na resolução das questões em relação ao tempo disponível.
+
+### Questões Anuladas
+
+Caso alguma questão tenha sido anulada durante o desafio, é apresentado um contador com o número de questões anuladas. Isso pode ocorrer quando uma questão é pulada ou deixada em branco pelo usuário.
+
+### Porcentagem de Acertos
+
+A tela final exibe a porcentagem de acertos do usuário em relação ao total de questões respondidas. Essa métrica é uma medida de sucesso e fornece uma visão geral da precisão das respostas.
+
+### Revisão das Questões
+
+Os usuários têm a opção de revisar as questões após concluírem o desafio. Ao clicar na opção de revisão, eles podem visualizar novamente as questões e as respostas fornecidas. Essa funcionalidade permite que os usuários analisem o desafio e aprendam com suas respostas.
+
+<img src="https://i.imgur.com/JvVbpAl.png"/>
+
+## Tela de Revisão
+
+A tela de revisão no CodeQuiz permite aos usuários revisarem as questões do desafio e identificarem as alternativas erradas que foram selecionadas. Essa tela fornece uma visão geral das respostas fornecidas, permitindo uma análise mais detalhada do desempenho individual em cada questão.
+
+### Navegação pelas Questões
+
+Na tela de revisão, os usuários têm a opção de navegar entre as questões do desafio. Eles podem percorrer as questões sequencialmente para revisar as respostas fornecidas em cada uma delas. Essa funcionalidade permite que os usuários analisem o desafio de forma mais detalhada.
+
+### Identificação de Alternativas Erradas
+
+Durante a revisão de cada questão, as alternativas erradas selecionadas pelos usuários são identificadas visualmente. Isso permite que os usuários identifiquem rapidamente quais alternativas foram incorretas e revisem seu raciocínio naquele momento específico.
+
+### Sigilo das Respostas das Questões Erradas
+
+Embora as alternativas erradas sejam identificadas, as respostas corretas não são reveladas para as questões respondidas incorretamente. Isso incentiva os usuários a aprender com seus erros, analisar suas respostas e revisar seus conhecimentos naquele tópico específico.
